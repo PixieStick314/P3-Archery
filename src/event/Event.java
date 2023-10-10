@@ -22,11 +22,11 @@ public class Event{
     }
 
     public void addAttendee(User user){
-        //jens loop
+        this.attendees.add(user);
     }
 
     public void removeAttendee(User user){
-        //jens loop
+        this.attendees.remove(user);
     }
 
     public List<User> getAttendees() {
