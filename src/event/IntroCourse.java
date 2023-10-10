@@ -1,3 +1,4 @@
+package src.event;
 /*IntroCourse (Subclass of event)
 	Attributes:
 		Inherited from event		
@@ -6,6 +7,6 @@
 		removeIntroCourseRegistration (User)
 */
 
-public class IntroCourse{
-    
+public class IntroCourse extends Event{
+
 }

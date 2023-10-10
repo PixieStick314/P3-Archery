@@ -1,3 +1,4 @@
+package src.user;
 /*User
   	Attributes:
 		Name,

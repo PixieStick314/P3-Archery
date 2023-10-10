@@ -1,3 +1,4 @@
+package src.event;
 /*Event
 	Attributes:
 		EventName,
