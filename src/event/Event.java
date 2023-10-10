@@ -1,29 +1,41 @@
 package src.event;
-/*Event
-	Attributes:
-		EventName,
-		EventID,
-		Attendees (List of users)
-	Methods:
-		addAttendee (User),
-		removeAttendee (User),
-		getAttendeeCount()
-		?getGeneralSkillLevel()?
-*/
 
+import src.user.User;
 import java.util.Date;
 import java.util.List;
 
 public class Event{
     //  Attributes
-    private String eventName;
-    private int eventID;
-    private List attendees;
-	private Date startDate;
-	private Date endDate;
+    public String eventName;
+    public int eventID;
+    public List<User> attendees;
+	public Date startDate;
+	public Date endDate;
 
     //  Constructor
+    public Event(String eventName, int eventID, List<User> attendees, Date startDate, Date endDate) {
+        this.eventName = eventName;
+        this.eventID = eventID;
+        this.attendees = attendees;
+        this.startDate = startDate;
+        this.endDate = endDate;
+    }
 
+    public void addAttendee(User user){
+        //jens loop
+    }
+
+    public void removeAttendee(User user){
+        //jens loop
+    }
+
+    public List<User> getAttendees() {
+        return attendees;
+    }
+
+    public int getAttendeeCount() {
+        return attendees.size();
+    }
     //  Getters & Setters
     
 }
