@@ -10,3 +10,16 @@
 		?getGeneralSkillLevel()?
 */
 
+import java.util.List;
+
+public class Event{
+    //  Attributes
+    private String eventName;
+    private int eventID;
+    private List attendees;
+
+    //  Constructor
+
+    //  Getters & Setters
+    
+}

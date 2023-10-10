@@ -5,3 +5,7 @@
     	addIntroCourseRegistration (User),
 		removeIntroCourseRegistration (User)
 */
+
+public class IntroCourse{
+    
+}

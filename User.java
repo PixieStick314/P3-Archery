@@ -26,6 +26,7 @@
 import java.util.Date;
 
 public class User{
+    //  Attributes
     private String name;
     private int gender;
     private String address;
@@ -38,5 +39,11 @@ public class User{
     private boolean isAdmin;
     private boolean isTrainer;
 
-    
+    //  Constructor
+
+
+
+    //  Getters & Setters
+
+
 }
