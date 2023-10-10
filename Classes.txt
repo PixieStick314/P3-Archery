@@ -1,19 +1,19 @@
 User
-  Attributes:
-	  Name,
-    Gender,
-    Address,
-    Postcode,
-    Cellphone nr,
-    Date of birth,
-    E-mail,
-    ArcherySkillLevel,
-    isSuperUser,
-    isAdmin,
-    isTrainer
-  Methods:
-	  register(),
-    createEvent(isSuperUser)
+  	Attributes:
+		Name,
+    	Gender,
+    	Address,
+	    Postcode,
+    	Cellphone nr,
+	    Date of birth,
+    	E-mail,
+	    ArcherySkillLevel,
+    	isSuperUser,
+    	isAdmin,
+	    isTrainer
+	Methods:
+		register(),
+    	createEvent(isSuperUser)
 		modifyEvent(isSuperUser)
 		deleteEvent(isSuperUser)
 		addUser(isSuperUser)
@@ -21,9 +21,10 @@ User
 		modifyUser(isSuperUser)
 		modifySuperUser(isAdmin)
 		modifyTrainerStatus(isSuperuser)
+
 Event
-  Attributes:
-	  EventName,
+	Attributes:
+		EventName,
 		EventID,
 		Attendees (List of users)
 	Methods:
@@ -33,21 +34,21 @@ Event
 		?getGeneralSkillLevel()?
 
 IntroCourse (Subclass of event)
-		Attributes:
-		  Inherited from event		
-		Methods:
-      addIntroCourseRegistration (User),
-			removeIntroCourseRegistration (User)
+	Attributes:
+		Inherited from event		
+	Methods:
+    	addIntroCourseRegistration (User),
+		removeIntroCourseRegistration (User)
 
 Training (Subclass of event)
     Attributes:
-      Inherited from event
-		Methods:
-			addTrainer(User user)
-			removeTrainer(User user)
+		Inherited from event
+	Methods:
+		addTrainer(User user)
+		removeTrainer(User user)
 
 Competition (Subclass of event)
     Attributes:
-      Inherited from event
+    	Inherited from event
     Methods:
       
