@@ -1,25 +1,4 @@
 package src.user;
-/*User
-  	Attributes:
-		Name,
-    	Gender,
-    	Address,
-	    Postcode,
-    	Cellphone nr,
-	    Date of birth,
-    	E-mail,
-	    ArcherySkillLevel,
-		hasLocker,
-		accessLevel
-	Methods:
-		register(),
-		createEvent(AccessLevel<=1),
-		modifyEvent(AccessLevel<=1),
-		deleteEvent(AccessLevel<=1),
-		addUser(AccessLevel==0),
-		removeUser(AccessLevel==0),
-		modifyUser(AccessLevel==0)
-*/
 
 import java.util.Date;
 
@@ -38,10 +17,33 @@ public class User{
 
 
     //  Constructor
-
-
+	public User(String name, String gender, String address, int postcode, int cellphoneNr, Date dateOfBirth, String eMail, int archerySkillLevel, int accessLevel, boolean hasLocker){
+		this.name = name;
+		this.gender = gender;
+		this.address = address;
+		this.postcode = postcode;
+		this.cellphoneNr = cellphoneNr;
+		this.dateOfBirth = dateOfBirth;
+		this.eMail = eMail;
+		this.archerySkillLevel = archerySkillLevel;
+		this.accessLevel = accessLevel;
+		this.hasLocker = hasLocker;
+	}
 
     //  Getters & Setters
+	public void register(User name, User eMail, ){
 
+	}
 
+	public void addUser(){
+		
+	}
+
+	public void modifyUser(){
+
+	}
+
+	public void removeUser(){
+
+	}
 }
