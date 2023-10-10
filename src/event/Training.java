@@ -14,7 +14,7 @@ public class Training extends Event{
     }
 
     public void addTrainer(User user){
-        if(accesLevel <= 1) {
+        if(user.accessLevel <= 1) {
             this.trainers.add(user);
         }
         else {
@@ -22,7 +22,7 @@ public class Training extends Event{
         }
     }
     public void removeTrainer(User user){
-        if(accesLevel <= 1) {
+        if(user.accessLevel <= 1) {
             this.trainers.remove(user);
         }
         else {

@@ -1,24 +1,31 @@
 package src.user;
-/*	Attributes:
-	    Int lockerNumber,
-        Boolean isAvailable,
-        String renterName,
-        String rentExpirationDate
-    Methods:
-	    getRenter(String name),
-        setRenter(String name),
-        endRentPeriod(),
- */
 
+import java.util.Date;
 
 public class Locker {
-    private int lockerNumber;
-    private boolean isAvailable;
-    private String renterName;
-    private String rentExpirationDate;
+    public int lockerNumber;
+    public boolean isAvailable;
+    public String renterName;
+    public Date rentExpirationDate;
 
     //  Constructor
+    public Locker(int lockerNumber, boolean isAvailable, String renterName, Date rentExpirationDate){
+        this.lockerNumber = lockerNumber;
+        this.isAvailable = isAvailable;
+        this.renterName = renterName;
+        this.rentExpirationDate = rentExpirationDate;
+    }
 
     //  Getters & Setters
+    public String getRenterName() {
+        return renterName;
+    }
 
+    public void setRenterName(User user){
+        
+    }
+
+    public Date endRentPeriod(){
+        return rentExpirationDate;
+    }
 }

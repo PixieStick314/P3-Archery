@@ -4,16 +4,16 @@ import java.util.Date;
 
 public class User{
     //  Attributes
-    private String name;
-    private String gender;
-    private String address;
-    private int postcode;
-    private int cellphoneNr;
-    private Date dateOfBirth;
-    private String eMail;
-    private int archerySkillLevel;
-    private int accessLevel;
-	private boolean hasLocker;
+    public String name;
+    public String gender;
+    public String address;
+    public int postcode;
+    public int cellphoneNr;
+    public Date dateOfBirth;
+    public String eMail;
+    public int archerySkillLevel;
+    public int accessLevel;
+	public boolean hasLocker;
 
 
     //  Constructor
@@ -31,7 +31,7 @@ public class User{
 	}
 
     //  Getters & Setters
-	public void register(User name, User eMail, ){
+	public void register(User name, User eMail){
 
 	}
 
