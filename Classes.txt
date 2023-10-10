@@ -13,13 +13,13 @@ User
 	    isTrainer
 	Methods:
 		register(),
-    	createEvent(isSuperUser)
-		modifyEvent(isSuperUser)
-		deleteEvent(isSuperUser)
-		addUser(isSuperUser)
-		removeUser(isSuperUser)
-		modifyUser(isSuperUser)
-		modifySuperUser(isAdmin)
+    	createEvent(isSuperUser),
+		modifyEvent(isSuperUser),
+		deleteEvent(isSuperUser),
+		addUser(isSuperUser),
+		removeUser(isSuperUser),
+		modifyUser(isSuperUser),
+		modifySuperUser(isAdmin),
 		modifyTrainerStatus(isSuperuser)
 
 Event
@@ -30,7 +30,7 @@ Event
 	Methods:
 		addAttendee (User),
 		removeAttendee (User),
-		getAttendeeCount()
+		getAttendeeCount(),
 		?getGeneralSkillLevel()?
 
 IntroCourse (Subclass of event)
@@ -44,11 +44,11 @@ Training (Subclass of event)
     Attributes:
 		Inherited from event
 	Methods:
-		addTrainer(User user)
+		addTrainer(User user),
 		removeTrainer(User user)
 
 Competition (Subclass of event)
     Attributes:
     	Inherited from event
     Methods:
-      
+

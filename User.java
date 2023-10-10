@@ -23,3 +23,20 @@
 		modifyTrainerStatus(isSuperuser)
 */
 
+import java.util.Date;
+
+public class User{
+    private String name;
+    private int gender;
+    private String address;
+    private int postcode;
+    private int cellphoneNr;
+    private Date dateOfBirth;
+    private String eMail;
+    private int archerySkillLevel;
+    private boolean isSuperUser;
+    private boolean isAdmin;
+    private boolean isTrainer;
+
+    
+}
