@@ -11,6 +11,7 @@ package src.event;
 		?getGeneralSkillLevel()?
 */
 
+import java.util.Date;
 import java.util.List;
 
 public class Event{
@@ -18,6 +19,8 @@ public class Event{
     private String eventName;
     private int eventID;
     private List attendees;
+	private Date startDate;
+	private Date endDate;
 
     //  Constructor
 

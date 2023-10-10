@@ -9,19 +9,16 @@ package src.user;
 	    Date of birth,
     	E-mail,
 	    ArcherySkillLevel,
-    	isSuperUser,
-    	isAdmin,
-	    isTrainer
+		hasLocker,
+		accessLevel
 	Methods:
 		register(),
-    	createEvent(isSuperUser)
-		modifyEvent(isSuperUser)
-		deleteEvent(isSuperUser)
-		addUser(isSuperUser)
-		removeUser(isSuperUser)
-		modifyUser(isSuperUser)
-		modifySuperUser(isAdmin)
-		modifyTrainerStatus(isSuperuser)
+		createEvent(AccessLevel<=1),
+		modifyEvent(AccessLevel<=1),
+		deleteEvent(AccessLevel<=1),
+		addUser(AccessLevel==0),
+		removeUser(AccessLevel==0),
+		modifyUser(AccessLevel==0)
 */
 
 import java.util.Date;
@@ -29,16 +26,16 @@ import java.util.Date;
 public class User{
     //  Attributes
     private String name;
-    private int gender;
+    private String gender;
     private String address;
     private int postcode;
     private int cellphoneNr;
     private Date dateOfBirth;
     private String eMail;
     private int archerySkillLevel;
-    private boolean isSuperUser;
-    private boolean isAdmin;
-    private boolean isTrainer;
+    private int accessLevel;
+	private boolean hasLocker;
+
 
     //  Constructor
 
