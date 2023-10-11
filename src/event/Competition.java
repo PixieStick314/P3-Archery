@@ -1,11 +1,4 @@
 package src.event;
-/*Competition (Subclass of event)
-    Attributes:
-    	Inherited from event
-    Methods:
-    	registrationForm(),
-		exportRegistrations()
-*/
 
 import src.user.User;
 
