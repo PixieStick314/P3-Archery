@@ -3,7 +3,7 @@ package src.util;
 import java.util.ArrayList;
 import java.util.List;
 
-import src.main.user.User;
+import src.models.User;
 
 public class UserManager {
     private List<User> users;

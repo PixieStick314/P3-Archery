@@ -1,9 +1,7 @@
-package src.main.event;
+package src.models;
 
 import java.util.Date;
 import java.util.List;
-
-import src.main.user.User;
 
 public class Training extends Event{
 

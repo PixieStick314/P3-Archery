@@ -1,10 +1,7 @@
-package src.main.event;
+package src.models;
 
 import java.util.Date;
 import java.util.List;
-
-import src.main.user.GuestUser;
-import src.main.user.User;
 
 public class IntroCourse extends Event{
 
