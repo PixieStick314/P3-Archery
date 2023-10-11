@@ -1,9 +1,9 @@
-package src.event;
-
-import src.user.User;
+package src.main.event;
 
 import java.util.Date;
 import java.util.List;
+
+import src.main.user.User;
 
 public class Competition extends Event{
 

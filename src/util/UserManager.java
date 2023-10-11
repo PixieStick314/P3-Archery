@@ -1,8 +1,9 @@
 package src.util;
 
-import src.user.User;
 import java.util.ArrayList;
 import java.util.List;
+
+import src.main.user.User;
 
 public class UserManager {
     private List<User> users;

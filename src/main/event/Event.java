@@ -1,8 +1,9 @@
-package src.event;
+package src.main.event;
 
-import src.user.User;
 import java.util.Date;
 import java.util.List;
+
+import src.main.user.User;
 
 public class Event{
     //  Attributes
