@@ -1,7 +1,7 @@
 package src.event;
 
 import src.user.User;
-import java.util.Date;
+import java.time.*;
 import java.util.List;
 
 public class Event{
@@ -9,16 +9,16 @@ public class Event{
     public String eventName;
     public int eventID;
     public List<User> attendees;
-	public Date startDate;
-	public Date endDate;
+	public ZonedDateTime startTime;
+	public ZonedDateTime endTime;
 
     //  Constructor
-    public Event(String eventName, int eventID, List<User> attendees, Date startDate, Date endDate) {
+    public Event(String eventName, int eventID, List<User> attendees, ZonedDateTime startTime, ZonedDateTime endTime) {
         this.eventName = eventName;
         this.eventID = eventID;
         this.attendees = attendees;
-        this.startDate = startDate;
-        this.endDate = endDate;
+        this.startTime = startTime;
+        this.endTime = endTime;
     }
 
     public void addAttendee(User user){

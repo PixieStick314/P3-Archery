@@ -9,13 +9,13 @@ package src.event;
 
 import src.user.User;
 
-import java.util.Date;
+import java.time.ZonedDateTime;
 import java.util.List;
 
 public class Competition extends Event{
 
-    public Competition(String eventName, int eventID, List<User > attendees, Date startDate, Date endDate) {
-        super(eventName, eventID, attendees, startDate, endDate);
+    public Competition(String eventName, int eventID, List<User > attendees, ZonedDateTime startTime, ZonedDateTime endTime) {
+        super(eventName, eventID, attendees, startTime, endTime);
     }
 
     public void registrationForm(User user) {

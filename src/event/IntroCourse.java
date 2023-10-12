@@ -2,15 +2,15 @@ package src.event;
 
 import src.user.GuestUser;
 import src.user.User;
-import java.util.Date;
+import java.time.ZonedDateTime;
 import java.util.List;
 
 public class IntroCourse extends Event{
 
     private List<GuestUser> guestAttendees;
 
-    public IntroCourse(String eventName, int eventID, List<User> attendees, Date startDate, Date endDate, List<GuestUser> guestAttendees) {
-        super(eventName, eventID, attendees, startDate, endDate);
+    public IntroCourse(String eventName, int eventID, List<User> attendees, ZonedDateTime startTime, ZonedDateTime endTime, List<GuestUser> guestAttendees) {
+        super(eventName, eventID, attendees, startTime, endTime);
         this.guestAttendees = guestAttendees;
     }
 

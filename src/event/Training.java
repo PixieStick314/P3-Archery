@@ -1,15 +1,15 @@
 package src.event;
 
 import src.user.User;
-import java.util.Date;
+import java.time.ZonedDateTime;
 import java.util.List;
 
 public class Training extends Event{
 
     public List<User> trainers;
 
-    public Training(String eventName, int eventID, List<User> attendees, Date startDate, Date endDate, List<User> trainers) {
-        super(eventName, eventID, attendees, startDate, endDate);
+    public Training(String eventName, int eventID, List<User> attendees, ZonedDateTime startTime, ZonedDateTime endTime, List<User> trainers) {
+        super(eventName, eventID, attendees, startTime, endTime);
         this.trainers = trainers;
     }
 
