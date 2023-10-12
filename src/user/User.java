@@ -1,6 +1,6 @@
 package src.user;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class User{
     //  Attributes
@@ -9,7 +9,7 @@ public class User{
     public String address;
     public int postcode;
     public int cellphoneNr;
-    public Date dateOfBirth;
+    public LocalDate dateOfBirth;
     public String eMail;
     public int archerySkillLevel;
     public int accessLevel;
@@ -17,7 +17,8 @@ public class User{
 
 
     //  Constructor
-	public User(String name, String gender, String address, int postcode, int cellphoneNr, Date dateOfBirth, String eMail, int archerySkillLevel, int accessLevel, boolean hasLocker){
+	public User(String name, String gender, String address, int postcode, int cellphoneNr, LocalDate dateOfBirth,
+				String eMail, int archerySkillLevel, int accessLevel, boolean hasLocker){
 		this.name = name;
 		this.gender = gender;
 		this.address = address;

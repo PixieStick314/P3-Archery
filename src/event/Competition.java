@@ -13,14 +13,15 @@ import java.time.ZonedDateTime;
 import java.util.List;
 
 public class Competition extends Event{
+    List<CompetitionForm> registrationList;
 
-
-    public Competition(String eventName, int eventID, List<User > attendees, ZonedDateTime startTime, ZonedDateTime endTime, String location) {
-        super(eventName, eventID, attendees, startTime, endTime, location);
+    public Competition(String eventName, User eventCreator, int eventID, ZonedDateTime startTime, ZonedDateTime endTime, String location) {
+        super(eventName, eventCreator, eventID, startTime, endTime, location);
     }
 
-    public void registrationForm(User user) {
-        //TBD
+    public void addRegistration(User user, Competition competition, int shootingClass, String face){
+        CompetitionForm registration = new CompetitionForm(user, competition, shootingClass, face);
+        registrationList.add(registration);
     }
 
     public String exportRegistration() {

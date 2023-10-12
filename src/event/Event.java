@@ -7,18 +7,19 @@ import java.util.List;
 public class Event{
     //  Attributes
     public String eventName;
+    public User eventCreator;
     public int eventID;
     public List<User> attendees;
 	public ZonedDateTime startTime;
 	public ZonedDateTime endTime;
     public String location;
-    public int requiredAccessLevel;
 
     //  Constructor
-    public Event(String eventName, int eventID, List<User> attendees, ZonedDateTime startTime, ZonedDateTime endTime, String location) {
+    public Event(String eventName, User eventCreator, int eventID, ZonedDateTime startTime, ZonedDateTime endTime, String location) {
         this.eventName = eventName;
+        this.eventCreator = eventCreator;
+        this.attendees.add(eventCreator);
         this.eventID = eventID;
-        this.attendees = attendees;
         this.startTime = startTime;
         this.endTime = endTime;
         this.location = location;

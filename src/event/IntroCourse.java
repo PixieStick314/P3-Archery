@@ -9,9 +9,9 @@ public class IntroCourse extends Event{
 
     private List<GuestUser> guestAttendees;
 
-    public IntroCourse(String eventName, int eventID, List<User> attendees, ZonedDateTime startTime, ZonedDateTime endTime,
+    public IntroCourse(String eventName, User eventCreator, int eventID, List<User> attendees, ZonedDateTime startTime, ZonedDateTime endTime,
                        String location, List<GuestUser> guestAttendees) {
-        super(eventName, eventID, attendees, startTime, endTime, location);
+        super(eventName, eventCreator, eventID, startTime, endTime, location);
         this.guestAttendees = guestAttendees;
     }
 
