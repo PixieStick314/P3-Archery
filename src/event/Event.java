@@ -11,14 +11,17 @@ public class Event{
     public List<User> attendees;
 	public ZonedDateTime startTime;
 	public ZonedDateTime endTime;
+    public String location;
+    public int requiredAccessLevel;
 
     //  Constructor
-    public Event(String eventName, int eventID, List<User> attendees, ZonedDateTime startTime, ZonedDateTime endTime) {
+    public Event(String eventName, int eventID, List<User> attendees, ZonedDateTime startTime, ZonedDateTime endTime, String location) {
         this.eventName = eventName;
         this.eventID = eventID;
         this.attendees = attendees;
         this.startTime = startTime;
         this.endTime = endTime;
+        this.location = location;
     }
 
     public void addAttendee(User user){

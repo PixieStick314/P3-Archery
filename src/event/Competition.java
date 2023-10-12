@@ -14,8 +14,9 @@ import java.util.List;
 
 public class Competition extends Event{
 
-    public Competition(String eventName, int eventID, List<User > attendees, ZonedDateTime startTime, ZonedDateTime endTime) {
-        super(eventName, eventID, attendees, startTime, endTime);
+
+    public Competition(String eventName, int eventID, List<User > attendees, ZonedDateTime startTime, ZonedDateTime endTime, String location) {
+        super(eventName, eventID, attendees, startTime, endTime, location);
     }
 
     public void registrationForm(User user) {

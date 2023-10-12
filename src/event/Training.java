@@ -7,9 +7,11 @@ import java.util.List;
 public class Training extends Event{
 
     public List<User> trainers;
+    public String skillLevel;
 
-    public Training(String eventName, int eventID, List<User> attendees, ZonedDateTime startTime, ZonedDateTime endTime, List<User> trainers) {
-        super(eventName, eventID, attendees, startTime, endTime);
+    public Training(String eventName, int eventID, List<User> attendees, ZonedDateTime startTime, ZonedDateTime endTime,
+                    String location, List<User> trainers) {
+        super(eventName, eventID, attendees, startTime, endTime, location);
         this.trainers = trainers;
     }
 
