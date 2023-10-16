@@ -1,4 +1,4 @@
-package src.main;
+package P3.Archery;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

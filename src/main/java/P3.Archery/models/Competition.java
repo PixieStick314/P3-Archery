@@ -1,4 +1,4 @@
-package src.models;
+package P3.Archery.models;
 
 import java.util.Date;
 import java.util.List;
@@ -17,5 +17,7 @@ public class Competition extends Event{
         String fileName = "Placeholder";
         return fileName;
     }
+
+    
 
 }

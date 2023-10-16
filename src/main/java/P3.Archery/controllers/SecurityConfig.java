@@ -1,4 +1,4 @@
-package com.auth0.example;
+package P3.Archery.controllers;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;

@@ -1,4 +1,4 @@
-package src.models;
+package P3.Archery.models;
 
 import java.util.Date;
 

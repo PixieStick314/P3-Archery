@@ -1,9 +1,9 @@
-package src.util;
+package P3.Archery.util;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import src.models.User;
+import P3.Archery.models.User;
 
 public class UserManager {
     private List<User> users;
