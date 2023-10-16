@@ -3,7 +3,7 @@ package P3.Archery.util;
 import java.util.ArrayList;
 import java.util.List;
 
-import P3.Archery.models.User;
+import P3.Archery.entity.User;
 
 public class UserManager {
     private List<User> users;

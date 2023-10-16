@@ -1,8 +1,16 @@
-package P3.Archery.models;
+package P3.Archery.entity;
+
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Date;
 
+@Document(collection = "lockers")
 public class Locker {
+
+    @Id
+    private String id;
+
     public int lockerNumber;
     public boolean isAvailable;
     public User renter;

@@ -1,4 +1,4 @@
-package P3.Archery.models;
+package P3.Archery.entity;
 
 import java.util.Date;
 import java.util.List;
