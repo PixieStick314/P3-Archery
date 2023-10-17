@@ -32,8 +32,16 @@ public class User{
 	}
 
     //  Getters & Setters
-	public void register(User name, User eMail){
+	public void register(userNameField, userGenderField, userAddressField, userPostcodeField, userCellphoneNrField, userDateOfBirthField, userEMailField){
+		String name = userNameField.getText();
+		String gender = userGenderField.getText();
+		String address = userAddressField.getText();
+		int postcode = Integer.parseInt(userPostcodeField.getText());
+		int cellphoneNr = Integer.parseInt(userCellphoneNrField.getText());
+		String dateOfBirth = userDateOfBirthField.getText();
+		String eMail = userEMailField.getText();
 
+		User newUser = new User(name, gender, address, postcode, cellphoneNr, dateOfBirth, eMail, 0, 0, false);
 	}
 
 	public void addUser(User user, String name, String gender, String address, int postcode, int cellphoneNr, Date dateOfBirth, String eMail, int archerySkillLevel, int accessLevel, boolean hasLocker) {
