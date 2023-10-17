@@ -1,28 +1,36 @@
-package src.user;
+package P3.Archery.entity;
+
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Date;
 
+@Document(collection = "lockers")
 public class Locker {
+
+    @Id
+    private String id;
+
     public int lockerNumber;
     public boolean isAvailable;
-    public String renterName;
+    public User renter;
     public Date rentExpirationDate;
 
     //  Constructor
     public Locker(int lockerNumber, boolean isAvailable, String renterName, Date rentExpirationDate){
         this.lockerNumber = lockerNumber;
         this.isAvailable = isAvailable;
-        this.renterName = renterName;
+        this.renter = renter;
         this.rentExpirationDate = rentExpirationDate;
     }
 
     //  Getters & Setters
     public String getRenterName() {
-        return renterName;
+        return (renter != null) ? renter.getName() : null;
     }
 
-    public void setRenterName(User user){
-        
+    public void setRenter(User renter){
+        this.renter = renter;
     }
 
     public Date endRentPeriod(){

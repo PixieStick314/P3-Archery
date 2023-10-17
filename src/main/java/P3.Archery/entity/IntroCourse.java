@@ -1,7 +1,5 @@
-package src.event;
+package P3.Archery.entity;
 
-import src.user.GuestUser;
-import src.user.User;
 import java.util.Date;
 import java.util.List;
 

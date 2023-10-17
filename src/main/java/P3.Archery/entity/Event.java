@@ -1,9 +1,11 @@
-package src.event;
+package P3.Archery.entity;
 
-import src.user.User;
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import java.util.Date;
 import java.util.List;
 
+@Document(collection = "events")
 public class Event{
     //  Attributes
     public String eventName;

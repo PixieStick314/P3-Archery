@@ -1,4 +1,4 @@
-package src.user;
+package P3.Archery.entity;
 
 import java.util.Date;
 

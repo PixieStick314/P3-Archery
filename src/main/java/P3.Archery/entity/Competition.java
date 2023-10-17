@@ -1,13 +1,4 @@
-package src.event;
-/*Competition (Subclass of event)
-    Attributes:
-    	Inherited from event
-    Methods:
-    	registrationForm(),
-		exportRegistrations()
-*/
-
-import src.user.User;
+package P3.Archery.entity;
 
 import java.util.Date;
 import java.util.List;
@@ -26,5 +17,7 @@ public class Competition extends Event{
         String fileName = "Placeholder";
         return fileName;
     }
+
+    
 
 }
