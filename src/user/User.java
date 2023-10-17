@@ -33,6 +33,7 @@ public class User{
 
     //  Getters & Setters
 	public void register(userNameField, userGenderField, userAddressField, userPostcodeField, userCellphoneNrField, userDateOfBirthField, userEMailField){
+		//uses registration information from textfields to create a new user
 		String name = userNameField.getText();
 		String gender = userGenderField.getText();
 		String address = userAddressField.getText();
