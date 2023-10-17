@@ -1,16 +1,18 @@
 package P3.Archery.entity;
 
-import java.util.Date;
+import java.time.ZonedDateTime;
 import java.util.List;
 
 public class Competition extends Event{
+    List<CompetitionForm> registrationList;
 
-    public Competition(String eventName, int eventID, List<User > attendees, Date startDate, Date endDate) {
-        super(eventName, eventID, attendees, startDate, endDate);
+    public Competition(String eventName, User eventCreator, int eventID, ZonedDateTime startTime, ZonedDateTime endTime, String location) {
+        super(eventName, eventCreator, eventID, startTime, endTime, location);
     }
 
-    public void registrationForm(User user) {
-        //TBD
+    public void addRegistration(User user, Competition competition, int shootingClass, String face){
+        CompetitionForm registration = new CompetitionForm(user, competition, shootingClass, face);
+        registrationList.add(registration);
     }
 
     public String exportRegistration() {

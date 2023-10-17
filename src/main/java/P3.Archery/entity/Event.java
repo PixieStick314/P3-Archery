@@ -1,26 +1,28 @@
-package P3.Archery.entity;
+package src.event;
 
-import org.springframework.data.mongodb.core.mapping.Document;
-
-import java.util.Date;
+import src.user.User;
+import java.time.*;
 import java.util.List;
 
-@Document(collection = "events")
 public class Event{
     //  Attributes
     public String eventName;
+    public User eventCreator;
     public int eventID;
     public List<User> attendees;
-	public Date startDate;
-	public Date endDate;
+	public ZonedDateTime startTime;
+	public ZonedDateTime endTime;
+    public String location;
 
     //  Constructor
-    public Event(String eventName, int eventID, List<User> attendees, Date startDate, Date endDate) {
+    public Event(String eventName, User eventCreator, int eventID, ZonedDateTime startTime, ZonedDateTime endTime, String location) {
         this.eventName = eventName;
+        this.eventCreator = eventCreator;
+        this.attendees.add(eventCreator);
         this.eventID = eventID;
-        this.attendees = attendees;
-        this.startDate = startDate;
-        this.endDate = endDate;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.location = location;
     }
 
     public void addAttendee(User user){
