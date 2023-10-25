@@ -1,6 +1,5 @@
-package src.event;
+package P3.Archery.entity;
 
-import src.user.User;
 import java.time.temporal.*;
 
 public class CompetitionForm {
