@@ -14,7 +14,7 @@ public class Locker {
     public int lockerNumber;
     public boolean isAvailable;
     public User renter;
-    public Date rentExpirationDate;
+    public ZonedDateTime rentExpirationDate;
 
     //  Constructor
     public Locker(int lockerNumber, boolean isAvailable, String renterName, Date rentExpirationDate){
@@ -33,7 +33,5 @@ public class Locker {
         this.renter = renter;
     }
 
-    public Date endRentPeriod(){
-        return rentExpirationDate;
-    }
+    public Date endRentPeriod(){ return rentExpirationDate; }
 }
