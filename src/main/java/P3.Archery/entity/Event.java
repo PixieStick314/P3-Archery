@@ -41,5 +41,12 @@ public class Event{
         return attendees.size();
     }
     //  Getters & Setters
-    
+
+    public Event repeatEvent(Event event){
+        int newID = 0; //ID assignment placeholder
+        ZonedDateTime newStartTime = event.startTime.plusDays(7);
+        ZonedDateTime newEndTime = event.endTime.plusDays(7);
+        src.event.Training newEvent = new src.event.Training(event.eventName, event.eventCreator, newID, newStartTime, newEndTime, event.location);
+        return newEvent;
+    }
 }

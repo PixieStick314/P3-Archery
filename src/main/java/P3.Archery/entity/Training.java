@@ -32,12 +32,4 @@ public class Training extends Event{
         }
     }
 
-    public Training repeatTraining(Training training){
-        int newID = 0; //ID assignment placeholder
-        ZonedDateTime newStartTime = training.startTime.plusDays(7);
-        ZonedDateTime newEndTime = training.endTime.plusDays(7);
-        Training newTraining = new Training(training.eventName, training.eventCreator, newID, newStartTime, newEndTime, training.location, training.trainers);
-        return newTraining;
-    }
-
 }
