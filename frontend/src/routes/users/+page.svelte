@@ -23,9 +23,6 @@
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>
 
-{#if form?.success}
+{#if form?.res.ok}
     <h4>Success!</h4>
-    {form.user.name}
-    {form.user.email}
-    {form.user.password}
 {/if}
