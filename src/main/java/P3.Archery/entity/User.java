@@ -124,14 +124,14 @@ public class User{
 		this.hasLocker = hasLocker;
 	}
 
-	public void addUser(User user, String name, String gender, String address, int postcode, int cellphoneNr, Date dateOfBirth, String eMail, int archerySkillLevel, int accessLevel, boolean hasLocker) {
+	public void addUser(User user, String name, String gender, String address, int postcode, int cellphoneNr, Date dateOfBirth, String eMail, int archerySkillLevel, int accessLevel, boolean hasLocker) throws Exception {
 		if(user.accessLevel == 0) {
 			//create new user and send to database
 			//to be implemented when i know how database works
-			User /*?*/ = new User(name, gender, address, postcode, cellphoneNr, dateOfBirth, eMail, archerySkillLevel, accessLevel, hasLocker);
+			User newUser = new User(name, gender, address, postcode, cellphoneNr, dateOfBirth, eMail, archerySkillLevel, accessLevel, hasLocker);
 		} else throw new Exception("Du skal være superuser for at kunne bruge denne funktion");
 	}
-
+/*
 	public void modifyUser(User user, String buttonValue, String change) {
 		if (user.accessLevel == 0 || user == this) {
 			System.out.println("Hvad kunne du tænke dig at ændre?");
@@ -196,5 +196,5 @@ public class User{
 		String eMail = userEMailField.getText();
 
 		User newUser = new User(name, gender, address, postcode, cellphoneNr, dateOfBirth, eMail, 0, 0, false);
-	}
+	}*/
 }

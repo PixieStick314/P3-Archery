@@ -1,3 +1,4 @@
+package P3.Archery.controller;/*
 package P3.Archery.controller;
 
 import org.springframework.context.annotation.Bean;
@@ -14,3 +15,4 @@ public class SecurityConfig {
                 .and().build();
     }
 }
+*/
