@@ -14,7 +14,7 @@ public class Training extends Event{
         this.trainers = trainers;
     }
 
-    public void addTrainer(User user){
+/*    public void addTrainer(User user){
         if(user.accessLevel <= 1) {
             this.trainers.add(user);
         }
@@ -29,7 +29,7 @@ public class Training extends Event{
         else {
             System.out.println("Error: You do not have permission");
         }
-    }
+    }*/
 
     public Training repeatTraining(Training training){
         int newID = 0; //ID assignment placeholder

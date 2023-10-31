@@ -9,9 +9,10 @@ public class CompetitionForm {
     private int shootingClass;
     private String face;
     public CompetitionForm (User user, Competition competition, int shootingClass, String face) {
-        this.name = user.name;
-        this.gender = user.gender;
-        this.age = user.dateOfBirth.until(competition.startTime.toLocalDate(), ChronoUnit.YEARS);
+        this.name = user.getName();
+        this.gender = user.getGender();
+        //placeholder
+        this.age = 69;
         this.shootingClass = shootingClass;
         this.face = face;
     }

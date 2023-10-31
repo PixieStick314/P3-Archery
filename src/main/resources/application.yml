@@ -1,18 +1,21 @@
 #src/main/resources/application.yml
 
 spring:
-  security:
-    oauth2:
-      client:
-        registration:
-          auth0:
-            client-id: PGt5MroGKhMGO3b2iIDTVhTHyzIGQ4yd
-            client-secret: YOUR_CLIENT_SECRET
-            scope:
-              - openid
-              - profile
-              - email
-        provider:
-          auth0:
-            # trailing slash is important!
-            issuer-uri: https://dev-g3473w4sqhbe48rv.us.auth0.com/
+  logging:
+    level:
+      org.springframework.security.web: DEBUG
+#  security:
+#    oauth2:
+#      client:
+#        registration:
+#          auth0:
+#            client-id: PGt5MroGKhMGO3b2iIDTVhTHyzIGQ4yd
+#            client-secret: YOUR_CLIENT_SECRET
+#            scope:
+#              - openid
+#              - profile
+#              - email
+#        provider:
+#          auth0:
+#            # trailing slash is important!
+#            issuer-uri: https://dev-g3473w4sqhbe48rv.us.auth0.com/
