@@ -9,19 +9,10 @@ export const actions = {
             password: data.get('password')
         }
 
-        const res = await fetch("http://localhost:8080/user/register", {
-            method: 'POST',
-            body: JSON.stringify({
-                "name": user.name,
-                email: user.email,
-                password: user.password
-            }),
-            headers: {
-                'Content-Type': 'application/json; charset=utf-8'
-            }
-        })
+        console.log("Name: " + user.name);
+        console.log("Email: " + user.email);
+        console.log("Password: " + user.password);
 
-        console.log(res)
-        return { success: true, res: res.status }
+        return { success: true, user: user }
 }
 };
