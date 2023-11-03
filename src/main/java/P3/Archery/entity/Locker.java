@@ -3,6 +3,7 @@ package P3.Archery.entity;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.time.ZonedDateTime;
 import java.util.Date;
 
 @Document(collection = "lockers")
@@ -17,7 +18,7 @@ public class Locker {
     public ZonedDateTime rentExpirationDate;
 
     //  Constructor
-    public Locker(int lockerNumber, boolean isAvailable, String renterName, Date rentExpirationDate){
+    public Locker(int lockerNumber, boolean isAvailable, String renterName, ZonedDateTime rentExpirationDate){
         this.lockerNumber = lockerNumber;
         this.isAvailable = isAvailable;
         this.renter = renter;
@@ -33,5 +34,5 @@ public class Locker {
         this.renter = renter;
     }
 
-    public Date endRentPeriod(){ return rentExpirationDate; }
+    public ZonedDateTime endRentPeriod(){ return rentExpirationDate; }
 }

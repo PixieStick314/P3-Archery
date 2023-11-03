@@ -24,7 +24,7 @@ public class UserManager {
     public void modifyUser(User user, String newName, String newEmail){
         // Modify user attributes
         user.setName(newName);
-        user.seteMail(newEmail);
+        user.setEmail(newEmail);
         // Further modification...
     }
 

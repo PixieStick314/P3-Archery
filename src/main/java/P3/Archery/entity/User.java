@@ -18,7 +18,7 @@ public class User{
     private int postcode;
     private int cellphoneNr;
     private Date dateOfBirth;
-    private String eMail;
+    private String email;
     private int archerySkillLevel;
     private int accessLevel;
     private boolean hasLocker;
@@ -35,7 +35,7 @@ public class User{
 		this.postcode = postcode;
 		this.cellphoneNr = cellphoneNr;
 		this.dateOfBirth = dateOfBirth;
-		this.eMail = eMail;
+		this.email = eMail;
 		this.archerySkillLevel = archerySkillLevel;
 		this.accessLevel = accessLevel;
 		this.hasLocker = hasLocker;
@@ -72,8 +72,8 @@ public class User{
 		return dateOfBirth;
 	}
 
-	public String geteMail() {
-		return eMail;
+	public String getemail() {
+		return email;
 	}
 
 	public int getArcherySkillLevel() {
@@ -108,8 +108,8 @@ public class User{
 		this.dateOfBirth = dateOfBirth;
 	}
 
-	public void seteMail(String eMail) {
-		this.eMail = eMail;
+	public void setEmail(String eMail) {
+		this.email = email;
 	}
 
 	public void setArcherySkillLevel(int archerySkillLevel) {
