@@ -1,14 +1,18 @@
 package P3.Archery.entity;
 
-import java.time.ZonedDateTime;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+import java.util.ArrayList;
 import java.util.List;
 
+@Document(collection = "events")
 public class Competition extends Event{
-    List<CompetitionForm> registrationList;
+    List<CompetitionForm> registrationList = new ArrayList<>();
 
-    public Competition(String eventName, User eventCreator, int eventID, ZonedDateTime startTime, ZonedDateTime endTime, String location) {
-        super(eventName, eventCreator, eventID, startTime, endTime, location);
+    public Competition(Event event) {
+        super(event.getEventName(), event.getEventCreator(), event.getStartTime(), event.getEndTime(), event.getLocation(), event.getEventType());
     }
+
 
     public void addRegistration(User user, Competition competition, int shootingClass, String face){
         CompetitionForm registration = new CompetitionForm(user, competition, shootingClass, face);

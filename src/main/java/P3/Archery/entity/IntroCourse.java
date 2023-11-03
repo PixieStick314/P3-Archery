@@ -1,15 +1,18 @@
 package P3.Archery.entity;
 
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import java.time.ZonedDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
+@Document(collection = "events")
 public class IntroCourse extends Event{
 
     private List<GuestUser> guestAttendees;
 
-    public IntroCourse(String eventName, User eventCreator, int eventID, List<User> attendees, ZonedDateTime startTime, ZonedDateTime endTime,
-                       String location, List<GuestUser> guestAttendees) {
-        super(eventName, eventCreator, eventID, startTime, endTime, location);
+    public IntroCourse(Event event, List<GuestUser> guestAttendees) {
+        super(event.getEventName(), event.getEventCreator(), event.getStartTime(), event.getEndTime(), event.getLocation(), event.getEventType());
         this.guestAttendees = guestAttendees;
     }
 
