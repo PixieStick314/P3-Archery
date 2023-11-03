@@ -51,6 +51,14 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+			<plugin>
+  			<groupId>org.codehaus.mojo</groupId>
+  			<artifactId>exec-maven-plugin</artifactId>
+  			<version>1.4.0</version>
+  			<configuration>
+    			<mainClass>P3.Archery.ArcheryApplication</mainClass>
+  			</configuration>
+			</plugin>
 		</plugins>
 	</build>
 
