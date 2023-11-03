@@ -12,6 +12,8 @@ public class User{
 	@Id
 	private String id;
 
+	private String password;
+
     private String name;
     private String gender;
     private String address;
@@ -28,7 +30,7 @@ public class User{
 	public User(String name, String gender, String address, 
 				int postcode, int cellphoneNr, 
 				Date dateOfBirth, String eMail, 
-				int archerySkillLevel, int accessLevel, boolean hasLocker){
+				int archerySkillLevel, int accessLevel, boolean hasLocker, String password){
 		this.name = name;
 		this.gender = gender;
 		this.address = address;
@@ -39,6 +41,7 @@ public class User{
 		this.archerySkillLevel = archerySkillLevel;
 		this.accessLevel = accessLevel;
 		this.hasLocker = hasLocker;
+		this.password = password;
 	}
 
     //  Getters & Setters
@@ -128,7 +131,7 @@ public class User{
 		if(user.accessLevel == 0) {
 			//create new user and send to database
 			//to be implemented when i know how database works
-			User newUser = new User(name, gender, address, postcode, cellphoneNr, dateOfBirth, eMail, archerySkillLevel, accessLevel, hasLocker);
+			User newUser = new User(name, gender, address, postcode, cellphoneNr, dateOfBirth, eMail, archerySkillLevel, accessLevel, hasLocker, password);
 		} else throw new Exception("Du skal være superuser for at kunne bruge denne funktion");
 	}
 /*

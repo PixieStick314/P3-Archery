@@ -3,16 +3,26 @@ export const actions = {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     register: async({request}) => {
         const data = await request.formData();
-        const user = {
-            name: data.get('name'),
-            email: data.get('email'),
-            password: data.get('password')
-        }
+        const res = await fetch("http://localhost:8080/user/create", {
+            method: 'POST',
+            body: JSON.stringify({
+                email: data.get("email"),
+                password: data.get("password"),
+                name: data.get("name"),
+                gender: data.get("gender"),
+                address: data.get("address"),
+                postcode: data.get("postcode"),
+                cellphoneNr: data.get("cellphoneNr"),
+                dateOfBirth: data.get("dateOfBirth"),
+                archerySkillLevel: data.get("archerySkillLevel"),
+            }),
+            headers: {
+                'Content-Type': 'application/json; charset=utf-8'
+            }
+        })
 
-        console.log("Name: " + user.name);
-        console.log("Email: " + user.email);
-        console.log("Password: " + user.password);
+        return { success: true }
 
-        return { success: true, user: user }
+
 }
 };

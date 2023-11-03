@@ -16,8 +16,12 @@
                     <a href="/competitions" class="nav-link">Stævner</a>
                 </li>
                 <li class="nav-item">
+                    <a href="/signup" class="nav-link">Log ind</a>
+                </li>
+                <li class="nav-item">
                     <a href="/logout" class="nav-link">Log ud</a>
                 </li>
+
             </ul>
         </div>
     </div>
