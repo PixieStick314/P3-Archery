@@ -16,7 +16,7 @@
                     <a href="/competitions" class="nav-link">Stævner</a>
                 </li>
                 <li class="nav-item">
-                    <a href="/signup" class="nav-link">Log ind</a>
+                    <a href="/create" class="nav-link">Opret</a>
                 </li>
                 <li class="nav-item">
                     <a href="/logout" class="nav-link">Log ud</a>
