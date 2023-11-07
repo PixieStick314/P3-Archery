@@ -19,9 +19,11 @@
                     <a href="/create" class="nav-link">Opret</a>
                 </li>
                 <li class="nav-item">
+                    <a href="/user/userID/myprofile" class="nav-link">Min Profil</a>
+                </li>
+                <li class="nav-item">
                     <a href="/logout" class="nav-link">Log ud</a>
                 </li>
-
             </ul>
         </div>
     </div>
