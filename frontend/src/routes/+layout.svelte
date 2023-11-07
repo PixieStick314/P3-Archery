@@ -7,19 +7,19 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="/">Begivenheder</a>
+                    <a class="nav-link" aria-current="page" href="/user/userID/events">Begivenheder</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/user">Medlemsskab</a>
+                    <a class="nav-link" href="/user/userID/info">Medlemsskab</a>
                 </li>
                 <li class="nav-item">
-                    <a href="/competitions" class="nav-link">Stævner</a>
+                    <a href="/user/userID/competitions" class="nav-link">Stævner</a>
                 </li>
                 <li class="nav-item">
-                    <a href="/create" class="nav-link">Opret</a>
+                    <a href="/user/userID/contact" class="nav-link">Kontakt</a>
                 </li>
                 <li class="nav-item">
-                    <a href="/logout" class="nav-link">Log ud</a>
+                    <a href="/user/userID/logout" class="nav-link">Log ud</a>
                 </li>
 
             </ul>

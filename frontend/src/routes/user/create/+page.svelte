@@ -1,8 +1,8 @@
 <script>
-    /** @type {import('./$types').PageData} */
+    /** @type {import('../../../../.svelte-kit/types/src/routes').PageData} */
     export let data;
 
-    /** @type {import('./$types').ActionData} */
+    /** @type {import('../../../../.svelte-kit/types/src/routes').ActionData} */
     export let form;
 </script>
 
