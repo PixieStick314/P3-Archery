@@ -1,1 +1,1 @@
-<h1 class="ms-5">Kommende stævner:</h1>
+<h1 class="container-sm">Kommende stævner:</h1>
