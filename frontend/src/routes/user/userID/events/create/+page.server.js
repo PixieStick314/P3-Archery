@@ -1,6 +1,5 @@
-/** @type {import('../../../.svelte-kit/types/src/routes').Actions} */
-
 export const actions = {
+    //@ts-ignore
     create: async({request}) => {
         const data = await request.formData();
 

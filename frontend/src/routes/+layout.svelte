@@ -21,7 +21,6 @@
                 <li class="nav-item">
                     <a href="/user/userID/logout" class="nav-link">Log ud</a>
                 </li>
-
             </ul>
         </div>
     </div>

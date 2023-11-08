@@ -19,4 +19,15 @@ public class UserController {
     public ResponseEntity create(@RequestBody User user) {
         return new ResponseEntity(userService.create(user), HttpStatus.OK);
     }
+
+    @GetMapping("/{userId}")
+    public ResponseEntity getUser(@PathVariable(value = "userId") String id) {
+        try {
+            return new ResponseEntity(userService.getById(id), HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity(e, HttpStatus.EXPECTATION_FAILED);
+        }
+    }
+
+
 }
