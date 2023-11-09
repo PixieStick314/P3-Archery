@@ -1,3 +1,4 @@
+/** @type {import('../../../../.svelte-kit/types/src/routes').Actions} */
 export const actions = {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     //@ts-ignore
