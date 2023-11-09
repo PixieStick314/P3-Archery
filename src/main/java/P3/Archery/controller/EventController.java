@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @CrossOrigin(origins = "http://localhost:5173")
 @RestController
@@ -42,6 +43,17 @@ public class EventController {
             default -> {
                 return new ResponseEntity(HttpStatus.BAD_REQUEST);
             }
+        }
+    }
+
+    @PostMapping("/register")
+    public ResponseEntity register(@PathVariable(value = "eventID") String id, @RequestBody User user) {
+        Optional<Event> event = eventService.getById(id);
+        if(event.isPresent()) {
+            event.get().addAttendee(user);
+            return new ResponseEntity(eventService.register(event.get()), HttpStatus.OK);
+        } else {
+            return new ResponseEntity("Event not found", HttpStatus.BAD_REQUEST);
         }
     }
 

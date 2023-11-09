@@ -13,6 +13,7 @@ public interface EventService {
     Optional<Event> getById(String id);
     List<Event> getAll();
     Event update(Event event);
+    Event register(Event event);
     void deleteById(String id);
 
     List<Event> getAllCompetitions();
