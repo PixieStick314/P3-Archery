@@ -1,16 +1,43 @@
 <script>
+    import {getElement} from "bootstrap/js/src/util/index.js";
+
     /** @type {import('../../../../.svelte-kit/types/src/routes').PageData} */
     export let data;
 
     /** @type {import('../../../../.svelte-kit/types/src/routes').ActionData} */
     export let form;
+
+    let email1 = "";
+    let emailMessage = "Vi deler aldrig din email."
+    let textColor = "black"
+
+    function validateEmail() {
+        var re = /\S+@\S+\.\S+/;
+        console.log(re.test(email1));
+        if(!re.test(email1)) {
+            emailMessage = "Indtast venligst en brugbar email";
+            textColor = "red";
+            return false;
+        }
+        else {
+            emailMessage = "Vi deler aldrig din email."
+            textColor = "black";
+            return true;
+        }
+    }
+    function validate() {
+        if(!validateEmail()) {
+            window.alert("Message!")
+        }
+    }
+
 </script>
 
 <form name="userCreation" method="POST" action="?/register" class="container-sm mt-5">
     <div class="mb-3">
         <label for="emailInput" class="form-label">Email address</label>
-        <input name="email" type="email" class="form-control" id="emailInput" aria-describedby="emailHelp" required>
-        <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+        <input bind:value={email1} name="email" type="email" class="form-control" id="emailInput" aria-describedby="emailHelp" required on:change={validateEmail}>
+        <div id="emailHelp" class="form-text" style="color: {textColor}" >{emailMessage}</div>
     </div>
     <div class="mb-3">
         <label for="passwordInput" class="form-label">Password</label>
@@ -51,5 +78,5 @@
         <input name="archerySkillLevel" type="number" class="form-control" id="archerySkillLevelInput" required>
     </div>
 
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <button type="submit" class="btn btn-primary" on:change={validate}>Submit</button>
 </form>
