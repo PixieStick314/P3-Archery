@@ -52,5 +52,4 @@ public class UserServiceImpl implements UserService {
         userRepository.deleteById(new ObjectId(id));
     }
 
-
 }
