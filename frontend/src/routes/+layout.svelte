@@ -22,6 +22,9 @@
                     <a href="/user/userID/contact" class="nav-link">Kontakt</a>
                 </li>
                 <li class="nav-item">
+                    <a href="/user/create" class="nav-link">Opret konto</a>
+                </li>
+                <li class="nav-item">
                     <a href="/user/userID/logout" class="nav-link">Log ud</a>
                 </li>
             </ul>
