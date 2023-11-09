@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -24,6 +25,16 @@ public class UserServiceImpl implements UserService {
     @Override
     public Optional<User> getById(String id) {
         return userRepository.findById(new ObjectId(id));
+    }
+
+    @Override
+    public Optional<User> getByEmail(String email) {
+        for (User u : userRepository.findAll()) {
+            if (u.getEmail().equals(email)) {
+                return Optional.of(u);
+            }
+        }
+        return Optional.empty();
     }
 
     @Override

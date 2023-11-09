@@ -127,6 +127,22 @@ public class User{
 		this.hasLocker = hasLocker;
 	}
 
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
 	public void addUser(User user, String name, String gender, String address, int postcode, int cellphoneNr, Date dateOfBirth, String email, int archerySkillLevel, int accessLevel, boolean hasLocker) throws Exception {
 		if(user.accessLevel == 0) {
 			//create new user and send to database
