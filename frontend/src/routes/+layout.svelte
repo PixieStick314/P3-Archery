@@ -1,3 +1,6 @@
+<script>
+    import FBIcon from "$lib/assets/FBcircle.png"
+</script>
 <nav class="navbar navbar-dark bg-dark navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
     <div class="container-fluid">
         <a class="navbar-brand" href="/">Aalborg Bueskyttelaug</a>
@@ -36,7 +39,7 @@
 
     <strong>Følg os:</strong>
     <a class="ms-5" href="https://www.facebook.com/aalborgbueskyttelaug/" target="_blank" rel="noopener noreferrer">
-        <img alt="Facebook circle" src="FBcircle.png" width="60p" height="60p">
+        <img alt="Facebook circle" src={FBIcon} width="60p" height="60p">
     </a>
     </div>
 </footer>
