@@ -4,7 +4,7 @@ export const actions = {
     create: async({request}) => {
         const data = await request.formData();
 
-        const res = await fetch("http://localhost:8080/events/create", {
+        const res = await fetch("http://localhost:5173/user/userID/events?/create", {
             method: 'POST',
             body: JSON.stringify({
                 eventName: data.get("eventName"),
