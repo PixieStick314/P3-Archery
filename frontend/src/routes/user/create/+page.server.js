@@ -1,4 +1,4 @@
-/** @type {import('../../../../.svelte-kit/types/src/routes').Actions} */
+
 export const actions = {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     //@ts-ignore
@@ -21,9 +21,6 @@ export const actions = {
                 'Content-Type': 'application/json; charset=utf-8'
             }
         })
-
         return { success: true }
-
-
 }
 };
