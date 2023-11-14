@@ -1,8 +1,8 @@
 <script>
-    /** @type {import('./$types').PageData} */
+    /** @type {import('../../../../.svelte-kit/types/src/routes').PageData} */
     export let data;
 
-    /** @type {import('./$types').ActionData} */
+    /** @type {import('../../../../.svelte-kit/types/src/routes').ActionData} */
     export let form;
 
 
@@ -36,5 +36,5 @@
             <option value="EVENT">Andet event</option>
         </select>
     </div>
-    <button type="submit" class="btn btn-primary">Create</button>
+    <button type="submit" class="btn btn-primary">Opret</button>
 </form>
