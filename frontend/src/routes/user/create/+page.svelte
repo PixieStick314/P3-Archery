@@ -2,6 +2,11 @@
 
     const specialRegex = /[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]/;
     const numberRegex = /\d/;
+    let showPassword = false;
+
+    function switchPasswordVisibility() {
+        showPassword = !showPassword;
+    }
 
     $: fields = {
         email: {
@@ -10,6 +15,11 @@
             textColor: "black"
         },
         password: {
+            value: "",
+            message: "",
+            textColor: "black"
+        },
+        confirmPassword: {
             value: "",
             message: "",
             textColor: "black"
@@ -41,30 +51,6 @@
         },
 
     };
-    /*
-    let email = "";
-    let password = "";
-    let name = "";
-    let gender = "";
-    let address = "";
-    let postcode = "";
-    let cellphoneNr = "";
-    let dateOfBirth = new Date();
-
-    let emailMessage = "Vi deler aldrig din email.";
-    let passwordMessage = "";
-    let nameMessage = "Fornavn og efternavn.";
-    let addressMessage = "Vej og husnr.";
-    let postcodeMessage = "";
-    let cellphoneNrMessage = "";
-
-    let emailTextColor = "black";
-    let passwordTextColor = "black";
-    let nameTextColor = "black";
-    let addressTextColor = "black";
-    let postcodeTextColor = "black";
-    let cellphoneNrTextColor = "black";
-    */
     function validateEmail() {
         let emailRegex = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;;
         const field = fields.email;
@@ -116,11 +102,25 @@
             return false;
         }
     }
+    function validateConfirmPassword(){
+        const field = fields.confirmPassword;
+        field.message = "";
+        field.textColor = "red";
+
+        if(fields.password.value === fields.confirmPassword.value){
+            field.message = ""
+            return true;
+        } else {
+            field.message = "Matcher ikke din kode"
+            return false;
+        }
+    }
 
     function validateName(){
         const field = fields.name;
         field.message = "";
-        if(field.value.includes(" ") && !specialRegex.test(field.value) && !numberRegex.test(field.value)){
+        const nameRegex = /^[A-Za-zæøåÆØÅ]+ [A-Za-zæøåÆØÅ]+$/;
+        if(nameRegex.test(field.value)){
             field.message = "";
             return true;
         } else {
@@ -165,10 +165,10 @@
             return true;
         }
     }
+
     function validatePhonenumber() {
         const field = fields.cellphoneNr;
-
-        let cellphoneNrRegex = /^\(?(\d{2})\)??(\d{2})?(\d{2})?(\d{2})$/;
+        let cellphoneNrRegex = /^\d{8}$/;
 
         if(!cellphoneNrRegex.test(field.value)) {
             field.message = "Indtast venligst et gyldigt dansk telefonummer (undlad landkode og specialtegn)";
@@ -180,30 +180,44 @@
             return true;
         }
     }
-    function validate() {
-        if(!validateEmail() ||
-            !validatePassword() ||
-            !validateName() ||
-            !validateAddress() ||
-            !validatePhonenumber()) {
+
+    function validate(event) {
+        if(!validateEmail() || !validatePassword() || !validateConfirmPassword() || !validateName() || !validateAddress() || !validatePostcode() || !validatePhonenumber()) {
+            event.preventDefault()
             alert("OBS: Du mangler at udfylde et eller flere af felterne!");
             return false;
         }
+        else{return true;}
     }
-
 </script>
 
 <form name="userCreation" method="POST" action="?/register" class="container-sm mt-5">
     <div class="mb-3">
         <label for="emailInput" class="form-label">Email address</label>
+
         <input required bind:value={fields.email.value} on:input={validateEmail} name="email" type="email" class="form-control" id="emailInput" aria-describedby="emailHelp" >
+
         <div id="emailHelp" class="form-text" style="color: {fields.email.textColor}" >{fields.email.message}</div>
     </div>
 
     <div class="mb-3">
         <label for="passwordInput" class="form-label">Password</label>
+        {#if !showPassword}
         <input bind:value={fields.password.value} name="password" type="password" class="form-control" id="passwordInput" required on:input={validatePassword}>
-            <div id="passHelp" class="form-text" style="color: {fields.password.textColor}" >{@html fields.password.message}</div>
+        {:else}
+            <input bind:value={fields.password.value} name="password" type="text" class="form-control" id="passwordInput" required on:input={validatePassword}>
+        {/if}
+        <div id="passHelp" class="form-text" style="color: {fields.password.textColor}" >{@html fields.password.message}</div>
+    </div>
+
+    <button on:click={switchPasswordVisibility}>
+        {showPassword ? 'Hide' : 'Show'} Password
+    </button>
+
+    <div class="mb-3">
+        <label for="confirmPasswordInput" class="form-label">Confirm Password</label>
+        <input bind:value={fields.confirmPassword.value} name="confirmPassword" type="password" class="form-control" id="confirmPasswordInput" required on:input={validateConfirmPassword}>
+        <div id="confPassHelp" class="form-text" style="color: {fields.confirmPassword.textColor}" >{@html fields.confirmPassword.message}</div>
     </div>
 
     <div class="mb-3">
@@ -211,6 +225,7 @@
         <input bind:value={fields.name.value} name="name" type="text" class="form-control" id="nameInput" required on:input={validateName}>
         <div id="nameHelp" class="form-text" style="color: {fields.name.textColor}" >{@html fields.name.message}</div>
     </div>
+
     <div class="mb-3">
         <label for="genderInput" class="form-label">Gender</label>
         <select name="gender" id="genderInput" class="custom-select form-control" required>
@@ -220,35 +235,29 @@
             <option value="Andet">Andet</option>
         </select>
     </div>
+
     <div class="mb-3">
         <label for="addressInput" class="form-label">Address</label>
         <input bind:value={fields.address.value} name="address" type="text" class="form-control" id="addressInput" required on:input={validateAddress}>
         <div id="addressHelp" class="form-text" style="color: {fields.address.textColor}" >{@html fields.address.message}</div>
     </div>
+
     <div class="mb-3">
         <label for="postcodeInput" class="form-label">Postcode</label>
         <input bind:value={fields.postcode.value} name="postcode" type="number" class="form-control" id="postcodeInput" required on:input={validatePostcode}>
         <div id="postcode" class="form-text" style="color: {fields.postcode.textColor}" >{fields.postcode.message}</div>
     </div>
+
     <div class="mb-3">
         <label for="cellphoneNrInput" class="form-label">Cellphone Number</label>
         <input bind:value={fields.cellphoneNr.value} name="cellphoneNr" type="tel" class="form-control" id="cellphoneNrInput" required on:input={validatePhonenumber}>
         <div id="cellphoneNr" class="form-text" style="color: {fields.cellphoneNr.textColor}" >{fields.cellphoneNr.message}</div>
     </div>
+
     <div class="mb-3">
         <label for="dateOfBirthInput" class="form-label">Date of Birth</label>
         <input bind:value={fields.dateOfBirth.value} name="dateOfBirth" type="date" class="form-control" id="dateOfBirthInput" required>
     </div>
 
-    <div class="mb-3">
-        <label for="archerySkillLevelInput" class="form-label">Archery Skill Level</label>
-        <!--<input name="archerySkillLevel" type="number" class="form-control" id="archerySkillLevelInput" required> 1-->
-        <select name="archerySkillLevel" id="archerySkillLevelInput" class="custom-select form-control" required>
-            <option value="Select" disabled >Vælg en af følgende:</option>
-            <option value= 1>Begynder</option>
-            <option value= 2>Middelmådig</option>
-            <option value= 3>Professionel</option>
-        </select>
-    </div>
-    <button on:click={validate} type="submit" class="btn btn-primary">Submit</button>
+    <button type="submit" class="btn btn-primary" on:click={validate}>Submit</button>
 </form>
