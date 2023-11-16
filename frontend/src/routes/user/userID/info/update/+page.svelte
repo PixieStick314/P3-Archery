@@ -11,9 +11,10 @@
     import { format } from 'date-fns';
     let formattedDate = format(new Date(data.user.dateOfBirth), 'yyyy-MM-dd');
 
+
     $: fields = {
         email: {
-            value: data.user.email,
+            value: "",
             message: "Vi deler aldrig din email.",
             textColor: "black"
         },
@@ -28,40 +29,49 @@
             textColor: "black"
         },
         name: {
-            value: data.user.name,
+            value: "",
             message: "Fornavn og efternavn.",
             textColor: "black"
         },
         address: {
-            value: data.user.address,
+            value: "",
             message: "Vej og husnr.",
             textColor: "black"
         },
         postcode: {
-            value: data.user.postcode,
+            value: "",
             message: "",
             textColor: "black"
         },
         cellphoneNr: {
-            value: data.user.cellphoneNr,
+            value: "",
             message: "",
             textColor: "black"
         },
         dateOfBirth: {
-            value: formattedDate,
+            value: new Date(),
             message: "Du skal være mindst 13 for at oprette som bruger.",
             textColor: "black"
         },
 
     };
+
+    let emailValue = "";
     function validateEmail() {
         let emailRegex = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;;
         const field = fields.email;
+        fields.email.value = emailValue;
 
         if(!emailRegex.test(field.value)) {
             field.message = "Indtast venligst en brugbar email.";
             field.textColor = "red";
             return false;
+        }
+        else if (fields.email.value === ""){
+            field.message = "Vi deler aldrig din email.";
+            field.textColor = "black";
+            fields.email.value = data.user.email;
+            return true
         }
         else {
             field.message = "Vi deler aldrig din email.";
@@ -69,6 +79,7 @@
             return true;
         }
     }
+
     function validatePassword() {
         const capitalRegex = /[A-Z]/;
         const field = fields.password;
@@ -82,6 +93,12 @@
             field.message = "OBS: Medarbejdere vil aldrig spørge efter din kode";
             field.textColor = "black";
             return true;
+        }
+        else if (field.value === ""){
+            field.message = "Vi deler aldrig din email.";
+            field.textColor = "black";
+            field.value = data.user.password;
+            return true
         }
         else {
             field.message = "Du mangler følgende i din kode:" + "<br/>";
@@ -121,15 +138,24 @@
         }
     }
 
-
+    let nameValue = ""
     function validateName(){
         const field = fields.name;
+        fields.name.value = nameValue;
+
         field.message = "";
         const nameRegex = /^[A-Za-zæøåÆØÅ]+ [A-Za-zæøåÆØÅ]+$/;
+
         if(nameRegex.test(field.value)){
             field.message = "";
             return true;
-        } else {
+        }
+            else if(fields.name.value === "") {
+                field.message = "";
+                fields.name.value = data.user.value;
+                return true;
+        }
+            else {
             field.message = "Indtast venligst dit navn og efternavn separeret af et mellemrum." + "<br/>";
             field.textColor = "red";
             field.message += !numberRegex.test(field.value)
@@ -139,16 +165,22 @@
                 ? ''
                 : 'Fjern venligst specialtegn fra dit navn' + "<br/>";
             return false;
-            console.log()
         }
     }
 
+    let addressValue = ""
     function validateAddress() {
         const field = fields.address;
+        fields.address.value = addressValue
+
         const addressRegex = /^(.+) (\d{1,3}[a-z]?) ? ?(\d{1,2}|tv|mf|th)?/;
         field.message = "";
         if (field.value.includes(" ") && numberRegex.test(field.value) && addressRegex.test(field.value)) {
             field.message = "";
+            return true;
+        } else if (fields.address.value == ""){
+            field.message = "";
+            fields.address.value = data.user.value;
             return true;
         } else {
             field.message = "Indtast venligst din adresse og husnr." + "<br/>";
@@ -160,27 +192,42 @@
         }
     }
 
+    let postcodeValue = "";
     function validatePostcode() {
         const field = fields.postcode;
         field.message = "";
+
+        fields.postcode.value = postcodeValue;
+
         if(field.value < "1000" || field.value > "9999") {
             field.message = "Indtast venligst et reelt postnummer";
             field.textColor = "red";
             return false;
+        } else if(fields.postcode.value == "") {
+            field.message = ""
+            fields.postcode.value = data.user.postcode;
+            return true;
         } else {
             field.message = ""
             return true;
         }
     }
 
+    let cellphoneNrValue = "";
     function validatePhonenumber() {
         const field = fields.cellphoneNr;
-        let cellphoneNrRegex = /^\(?(\d{2})\)??(\d{2})?(\d{2})?(\d{2})$/;
+        let cellphoneNrRegex = /^\d{8}$/;
+
+        fields.cellphoneNr.value = cellphoneNrValue;
 
         if(!cellphoneNrRegex.test(field.value)) {
             field.message = "Indtast venligst et gyldigt dansk telefonummer (undlad landkode og specialtegn)";
             field.textColor = "red";
             return false;
+        } else if (fields.cellphoneNr.value = "") {
+            field.message = "";
+            fields.cellphoneNr.value = data.user.cellphoneNr;
+            return true;
         }
         else {
             field.message = "";
@@ -189,42 +236,65 @@
     }
 
     function validate(event) {
-        if(!validateEmail() || !validatePassword() || !validateConfirmPassword() || !validateName() || !validateAddress() || !validatePostcode() || !validatePhonenumber()) {
+        if(emailValue.trim() === ""){
+            emailValue = data.user.email;
+        }
+        else if(nameValue.trim() === ""){
+            nameValue = data.user.name;
+            console.log(nameValue);
+        }
+        else if(addressValue.trim() === ""){
+            addressValue = data.user.address;
+        }
+        else if(cellphoneNrValue.trim() === ""){
+            cellphoneNrValue = data.user.cellphoneNr;
+        }
+        else if(!validateEmail() ||
+            !validatePassword() ||
+            !validateConfirmPassword() ||
+            !validateName() ||
+            !validateAddress() ||
+            !validatePostcode() ||
+            !validatePhonenumber()) {
             event.preventDefault()
-            alert("OBS: Du mangler at udfylde et eller flere af felterne!");
+            alert("OBS: Du mangler at udfylde et eller flere af felterne.");
             return false;
         }
-        else{return true;}
     }
 </script>
 
-<form name="userCreation" method="POST" action="?/update" class="container-sm mt-5">
+<form name="userUpdate" method="POST" action="?/update" class="container-sm mt-5" on:submit={validate}>
     <div class="mb-3">
-        <label for="emailInput" class="form-label">Email address</label>
-        <input required bind:value={fields.email.value} on:input={validateEmail} name="email" type="email" class="form-control" id="emailInput" aria-describedby="emailHelp" >
+        <label for="emailInput" class="form-label">Email addresse</label>
+        <input bind:value={emailValue} on:input={validateEmail} name="email" type="text" class="form-control" id="emailInput" aria-describedby="emailHelp" placeholder={data.user.email}>
         <div id="emailHelp" class="form-text" style="color: {fields.email.textColor}" >{fields.email.message}</div>
     </div>
 
     <div class="mb-3">
-        <label for="passwordInput" class="form-label">Password</label>
-        <input value={fields.password.value} name="password" type="password" class="form-control" id="passwordInput" required on:input={validatePassword}>
+        <label for="passwordInfo" class="form-label">Nuværende kodeord</label>
+        <div id="passwordInfo" class="form-text">{fields.password.value}</div>
+    </div>
+
+    <div class="mb-3">
+        <label for="passwordInput" class="form-label">Kodeord</label>
+        <input name="password" type="password" class="form-control" id="passwordInput" on:input={validatePassword}>
         <div id="passHelp" class="form-text" style="color: {fields.password.textColor}" >{@html fields.password.message}</div>
     </div>
 
     <div class="mb-3">
-        <label for="confirmPasswordInput" class="form-label">Confirm Password</label>
-        <input bind:value={fields.confirmPassword.value} name="confirmPassword" type="password" class="form-control" id="confirmPasswordInput" required on:input={validateConfirmPassword}>
+        <label for="confirmPasswordInput" class="form-label">Bekræft kodeord</label>
+        <input name="confirmPassword" type="password" class="form-control" id="confirmPasswordInput" on:input={validateConfirmPassword}>
         <div id="confPassHelp" class="form-text" style="color: {fields.confirmPassword.textColor}" >{@html fields.confirmPassword.message}</div>
     </div>
 
     <div class="mb-3">
-        <label for="nameInput" class="form-label">Name</label>
-        <input bind:value={data.user.name} name="name" type="text" class="form-control" id="nameInput" required on:input={validateName} >
+        <label for="nameInput" class="form-label">Fulde navn</label>
+        <input bind:value={nameValue} name="name" type="text" class="form-control" id="nameInput" on:input={validateName} placeholder={data.user.name}>
         <div id="nameHelp" class="form-text" style="color: {fields.name.textColor}" >{@html fields.name.message}</div>
     </div>
     <div class="mb-3">
-        <label for="genderInput" class="form-label">Gender</label>
-        <select name="gender" id="genderInput" class="custom-select form-control" required>
+        <label for="genderInput" class="form-label">Køn</label>
+        <select name="gender" id="genderInput" class="custom-select form-control" placeholder={data.user.gender}>
             <option value="Select" disabled >Vælg en af følgende:</option>
             <option value="Mand">Mand</option>
             <option value="Kvinde">Kvinde</option>
@@ -232,25 +302,25 @@
         </select>
     </div>
     <div class="mb-3">
-        <label for="addressInput" class="form-label">Address</label>
-        <input bind:value={data.user.address} name="address" type="text" class="form-control" id="addressInput" required on:input={validateAddress}>
+        <label for="addressInput" class="form-label">Adresse</label>
+        <input bind:value={addressValue} name="address" type="text" class="form-control" id="addressInput" on:input={validateAddress} placeholder={data.user.address}>
         <div id="addressHelp" class="form-text" style="color: {fields.address.textColor}" >{@html fields.address.message}</div>
     </div>
     <div class="mb-3">
-        <label for="postcodeInput" class="form-label">Postcode</label>
-        <input bind:value={data.user.postcode} name="postcode" type="number" class="form-control" id="postcodeInput" required on:input={validatePostcode}>
+        <label for="postcodeInput" class="form-label">Postnr.</label>
+        <input bind:value={postcodeValue} name="postcode" type="number" class="form-control" id="postcodeInput" on:input={validatePostcode} placeholder={data.user.postcode}>
         <div id="postcode" class="form-text" style="color: {fields.postcode.textColor}" >{fields.postcode.message}</div>
     </div>
     <div class="mb-3">
-        <label for="cellphoneNrInput" class="form-label">Cellphone Number</label>
-        <input value={data.user.cellphoneNr} name="cellphoneNr" type="tel" class="form-control" id="cellphoneNrInput" required on:input={validatePhonenumber}>
+        <label for="cellphoneNrInput" class="form-label">Tlf. nr.</label>
+        <input bind:value={cellphoneNrValue} name="cellphoneNr" type="tel" class="form-control" id="cellphoneNrInput" on:input={validatePhonenumber} placeholder={data.user.cellphoneNr}>
         <div id="cellphoneNr" class="form-text" style="color: {fields.cellphoneNr.textColor}" >{fields.cellphoneNr.message}</div>
     </div>
     <div class="mb-3">
-        <label for="dateOfBirthInput" class="form-label">Date of Birth</label>
-        <input bind:value={formattedDate} name="dateOfBirth" type="date" class="form-control" id="dateOfBirthInput" required>
+        <label for="dateOfBirthInput" class="form-label">Fødselsdato</label>
+        <input value={formattedDate} name="dateOfBirth" type="date" class="form-control" id="dateOfBirthInput">
     </div>
-    <button type="submit" class="btn btn-primary" on:click={validate}>Opdatér</button>
+    <button type="submit" class="btn btn-primary">Opdatér</button>
 
 </form>
 

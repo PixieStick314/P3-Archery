@@ -203,7 +203,7 @@
     <div class="mb-3">
         <label for="passwordInput" class="form-label">Password</label>
         {#if !showPassword}
-        <input bind:value={fields.password.value} name="password" type="password" class="form-control" id="passwordInput" required on:input={validatePassword}>
+            <input bind:value={fields.password.value} name="password" type="password" class="form-control" id="passwordInput" required on:input={validatePassword}>
         {:else}
             <input bind:value={fields.password.value} name="password" type="text" class="form-control" id="passwordInput" required on:input={validatePassword}>
         {/if}
@@ -216,7 +216,11 @@
 
     <div class="mb-3">
         <label for="confirmPasswordInput" class="form-label">Confirm Password</label>
-        <input bind:value={fields.confirmPassword.value} name="confirmPassword" type="password" class="form-control" id="confirmPasswordInput" required on:input={validateConfirmPassword}>
+        {#if !showPassword}
+            <input bind:value={fields.confirmPassword.value} name="confirmPassword" type="password" class="form-control" id="confirmPasswordInput" required on:input={validateConfirmPassword}>
+        {:else}
+            <input bind:value={fields.confirmPassword.value} name="confirmPassword" type="text" class="form-control" id="confirmPasswordInput" required on:input={validateConfirmPassword}>
+        {/if}
         <div id="confPassHelp" class="form-text" style="color: {fields.confirmPassword.textColor}" >{@html fields.confirmPassword.message}</div>
     </div>
 

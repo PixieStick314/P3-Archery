@@ -55,6 +55,8 @@ public class User{
         this.name = name;
     }
 
+	public String getPassword() { return password; }
+
 	public String getGender() {
 		return gender;
 	}
@@ -90,6 +92,8 @@ public class User{
 	public boolean isHasLocker() {
 		return hasLocker;
 	}
+
+	public void setPassword(String password) {this.password = password;}
 
 	public void setGender(String gender) {
 		this.gender = gender;

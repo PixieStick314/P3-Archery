@@ -13,7 +13,6 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/user")
 public class UserController {
-
     private final UserService userService;
 
     public UserController(UserService userService) { this.userService = userService; }
@@ -28,6 +27,7 @@ public class UserController {
         Optional<User> targetUser = userService.getById(id);
         if (targetUser.isPresent()) {
             targetUser.get().setName(user.getName());
+            targetUser.get().setPassword(user.getPassword());
             targetUser.get().setGender(user.getGender());
             targetUser.get().setAddress(user.getAddress());
             targetUser.get().setPostcode(user.getPostcode());
