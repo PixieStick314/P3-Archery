@@ -11,6 +11,7 @@
     import { format } from 'date-fns';
     let formattedDate = format(new Date(data.user.dateOfBirth), 'yyyy-MM-dd');
 
+    console.log(data);
 
     $: fields = {
         email: {
@@ -127,7 +128,7 @@
         field.textColor = "red";
         const oldPassword = data.user.password;
 
-        if(fields.password.value === oldPassword) {
+        if(fields.password.value === "") {
             return true
         } else if (fields.password.value === fields.confirmPassword.value){
             field.message = ""
@@ -236,6 +237,7 @@
     }
 
     function validate(event) {
+        //The user should not be allowed to send a form with empty text fields
         if(emailValue.trim() === ""){
             emailValue = data.user.email;
         }

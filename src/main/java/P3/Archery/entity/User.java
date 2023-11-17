@@ -115,7 +115,7 @@ public class User{
 		this.dateOfBirth = dateOfBirth;
 	}
 
-	public void setEmail(String eMail) {
+	public void setEmail(String email) {
 		this.email = email;
 	}
 

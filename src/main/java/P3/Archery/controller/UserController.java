@@ -35,6 +35,7 @@ public class UserController {
             targetUser.get().setDateOfBirth(user.getDateOfBirth());
             targetUser.get().setEmail(user.getEmail());
             targetUser.get().setArcherySkillLevel(user.getArcherySkillLevel());
+            System.out.println(user.getEmail());
             return new ResponseEntity(userService.update(targetUser.get()), HttpStatus.OK);
         } else {
             return new ResponseEntity("User not found", HttpStatus.BAD_REQUEST);
