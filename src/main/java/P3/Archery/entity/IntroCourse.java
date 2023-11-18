@@ -16,11 +16,16 @@ public class IntroCourse extends Event{
         this.guestAttendees = guestAttendees;
     }
 
-    public void addIntroCourseRegistration (GuestUser guestUser) {
-       this.guestAttendees.add(guestUser);
+    public void addIntroCourseRegistration(GuestUser guestUser) {
+        if (this.guestAttendees == null) {
+            this.guestAttendees = new ArrayList<>();
+        }
+        this.guestAttendees.add(guestUser);
     }
 
     public void removeIntroCourseRegistration(GuestUser guestUser) {
-        this.guestAttendees.remove(guestUser);
+        if (this.guestAttendees != null) {
+            this.guestAttendees.remove(guestUser);
+        }
     }
 }

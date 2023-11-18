@@ -1,9 +1,6 @@
 package P3.Archery.service;
 
-import P3.Archery.entity.Competition;
-import P3.Archery.entity.Event;
-import P3.Archery.entity.IntroCourse;
-import P3.Archery.entity.Training;
+import P3.Archery.entity.*;
 import P3.Archery.repository.EventRepository;
 import org.springframework.stereotype.Service;
 
@@ -59,5 +56,18 @@ public class EventServiceImpl implements EventService {
     public List<Event> getAllIntroCourses() {
         return eventRepository.findAll().stream().filter(e -> e.getEventType() == Event.EventType.INTRO).collect(Collectors.toList());
     }
-
+    @Override
+    public void addGuestToCourse(String eventId, GuestUser guestUser) {
+        IntroCourse course = (IntroCourse) eventRepository.findById(eventId)
+                .orElseThrow(() -> new RuntimeException("Event not found"));
+        course.addIntroCourseRegistration(guestUser);
+        eventRepository.save(course);
+    }
+    @Override
+    public void removeGuestFromCourse(String eventId, GuestUser guestUser){
+        IntroCourse course = (IntroCourse) eventRepository.findById(eventId)
+                .orElseThrow(() -> new RuntimeException("Event not found"));
+        course.removeIntroCourseRegistration(guestUser);
+        eventRepository.save(course);
+    }
 }

@@ -31,6 +31,9 @@
                 <li class="nav-item">
                     <a href="/user/userID/logout" class="nav-link">Log ud</a>
                 </li>
+                <li class="nav-item">
+                    <a href="/introcourse " class="nav-link">Prøv det</a>
+                </li>
             </ul>
         </div>
     </div>
