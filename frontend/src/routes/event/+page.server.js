@@ -1,3 +1,18 @@
+import {invalidateAll} from "$app/navigation";
+
+export const load = async () => {
+    const res = await fetch("http://localhost:8080/event/", {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json; charset=utf-8'
+        }
+    })
+
+    const events = await res.json();
+
+    return { events }
+}
+
 export const actions = {
     //@ts-ignore
     create: async({request}) => {
@@ -16,6 +31,8 @@ export const actions = {
                 'Content-Type': 'application/json; charset=utf-8'
             }
         })
+
+        await load();
 
         console.log(res)
     }

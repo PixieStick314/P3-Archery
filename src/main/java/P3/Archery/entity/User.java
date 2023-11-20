@@ -29,7 +29,7 @@ public class User{
     //  Constructor
 	public User(String name, String gender, String address, 
 				int postcode, int cellphoneNr, 
-				Date dateOfBirth, String eMail, 
+				Date dateOfBirth, String email,
 				int archerySkillLevel, int accessLevel, boolean hasLocker, String password){
 		this.name = name;
 		this.gender = gender;
@@ -37,7 +37,7 @@ public class User{
 		this.postcode = postcode;
 		this.cellphoneNr = cellphoneNr;
 		this.dateOfBirth = dateOfBirth;
-		this.email = eMail;
+		this.email = email;
 		this.archerySkillLevel = archerySkillLevel;
 		this.accessLevel = accessLevel;
 		this.hasLocker = hasLocker;
@@ -75,7 +75,7 @@ public class User{
 		return dateOfBirth;
 	}
 
-	public String getemail() {
+	public String getEmail() {
 		return email;
 	}
 
@@ -127,11 +127,11 @@ public class User{
 		this.hasLocker = hasLocker;
 	}
 
-	public void addUser(User user, String name, String gender, String address, int postcode, int cellphoneNr, Date dateOfBirth, String eMail, int archerySkillLevel, int accessLevel, boolean hasLocker) throws Exception {
+	public void addUser(User user, String name, String gender, String address, int postcode, int cellphoneNr, Date dateOfBirth, String email, int archerySkillLevel, int accessLevel, boolean hasLocker) throws Exception {
 		if(user.accessLevel == 0) {
 			//create new user and send to database
 			//to be implemented when i know how database works
-			User newUser = new User(name, gender, address, postcode, cellphoneNr, dateOfBirth, eMail, archerySkillLevel, accessLevel, hasLocker, password);
+			User newUser = new User(name, gender, address, postcode, cellphoneNr, dateOfBirth, email, archerySkillLevel, accessLevel, hasLocker, password);
 		} else throw new Exception("Du skal være superuser for at kunne bruge denne funktion");
 	}
 /*

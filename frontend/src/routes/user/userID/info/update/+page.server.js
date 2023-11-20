@@ -1,9 +1,25 @@
+let userId = "654c893fa37f671995cefba8"
+
+export const load = async () => {
+    const response = await fetch(`http://localhost:8080/user/${userId}`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json; charset=utf-8'
+        }
+    })
+    const user = await response.json();
+
+    console.log(user)
+
+    return { user }
+}
+
 export const actions = {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     //@ts-ignore
-    register: async({request}) => {
+    update: async({request}) => {
         const data = await request.formData();
-        const res = await fetch("http://localhost:8080/user/create", {
+        const res = await fetch(`http://localhost:8080/user/update/${userId}`, {
             method: 'POST',
             body: JSON.stringify({
                 email: data.get("email"),
@@ -21,8 +37,9 @@ export const actions = {
             }
         })
 
+        const reply = res.json();
+
         return { success: true }
 
-
-}
+    }
 };

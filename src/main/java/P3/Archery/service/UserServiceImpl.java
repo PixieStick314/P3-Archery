@@ -2,6 +2,7 @@ package P3.Archery.service;
 
 import P3.Archery.entity.User;
 import P3.Archery.repository.UserRepository;
+import org.bson.types.ObjectId;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,7 +23,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Optional<User> getById(String id) {
-        return userRepository.findById(id);
+        return userRepository.findById(new ObjectId(id));
     }
 
     @Override
@@ -37,7 +38,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void deleteById(String id) {
-        userRepository.deleteById(id);
+        userRepository.deleteById(new ObjectId(id));
     }
 
 
