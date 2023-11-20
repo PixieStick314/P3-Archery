@@ -9,11 +9,12 @@ import java.util.List;
 public class Training extends Event{
 
     public List<User> trainers;
-    public String skillLevel;
+    //public String skillLevel;
 
-    public Training(Event event, List<User> trainers) {
-        super(event.getEventName(), event.getEventCreator(), event.getStartTime(), event.getEndTime(), event.getLocation(), event.getEventType());
+    public Training(String eventName, User eventCreator, ZonedDateTime startTime, ZonedDateTime endTime, String location, EventType eventType, List<User> trainers) {
+        super(eventName, eventCreator, startTime, endTime, location, eventType);
         this.trainers = trainers;
+        //this.skillLevel = skillLevel;
     }
 
     public void addTrainer(User user){
@@ -33,6 +34,7 @@ public class Training extends Event{
         }
     }
 
+/*
     public Training repeatTraining(Training training){
         String newID = "0"; //ID assignment placeholder
         ZonedDateTime newStartTime = training.startTime.plusDays(7);
@@ -40,5 +42,6 @@ public class Training extends Event{
         Training newTraining = new Training(training, training.trainers);
         return newTraining;
     }
+*/
 
 }

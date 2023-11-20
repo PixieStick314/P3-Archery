@@ -28,21 +28,51 @@ public class EventController {
     public ResponseEntity create(@RequestBody Event event) {
         switch (event.getEventType()) {
             case COMPETITION -> {
-                Competition competition = new Competition(event);
+                Competition competition = new Competition(
+                        event.getEventName(),
+                        event.getEventCreator(),
+                        event.getStartTime(),
+                        event.getEndTime(),
+                        event.getLocation(),
+                        event.getEventType(),
+                        new ArrayList<>()
+                );
                 return new ResponseEntity(eventService.create(competition), HttpStatus.OK);
             }
             case TRAINING -> {
-                Training training = new Training(event, new ArrayList<>());
+                Training training = new Training(
+                        event.getEventName(),
+                        event.getEventCreator(),
+                        event.getStartTime(),
+                        event.getEndTime(),
+                        event.getLocation(),
+                        event.getEventType(),
+                        new ArrayList<>()
+                );
                 return new ResponseEntity(eventService.create(training),HttpStatus.OK);
             }
             case INTRO -> {
-                IntroCourse introCourse = new IntroCourse(event, new ArrayList<>());
+                IntroCourse introCourse = new IntroCourse(
+                        event.getEventName(),
+                        event.getEventCreator(),
+                        event.getStartTime(),
+                        event.getEndTime(),
+                        event.getLocation(),
+                        event.getEventType(),
+                        new ArrayList<>()
+                );
                 return new ResponseEntity(eventService.create(introCourse), HttpStatus.OK);
             }
             default -> {
                 return new ResponseEntity(HttpStatus.BAD_REQUEST);
             }
         }
+    }
+
+    @GetMapping("/")
+    public List<Event> getAllEvents() {
+        //TODO: once tokens are done, only return all if user is authenticated
+        return eventService.getAll();
     }
 
     @GetMapping("/competition")
