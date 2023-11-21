@@ -27,7 +27,7 @@ public class UserController {
         Optional<User> targetUser = userService.getById(id);
         if (targetUser.isPresent()) {
             targetUser.get().setName(user.getName());
-            targetUser.get().setPassword(user.getPassword());
+            targetUser.get().setPassword(targetUser.get().getPassword());
             targetUser.get().setGender(user.getGender());
             targetUser.get().setAddress(user.getAddress());
             targetUser.get().setPostcode(user.getPostcode());
