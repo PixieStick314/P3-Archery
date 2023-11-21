@@ -28,10 +28,10 @@
 
         if (response.ok) {
             alert('Guest registered successfully');
-            // Reset form or handle success
+
         } else {
             alert('Failed to register guest');
-            // Handle error
+
         }
     }
 </script>

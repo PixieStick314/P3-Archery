@@ -33,7 +33,7 @@ public class EventController {
             }
             case TRAINING -> {
                 Training training = new Training(event, new ArrayList<>());
-                return new ResponseEntity(eventService.create(training),HttpStatus.OK);
+                return new ResponseEntity(eventService.create(training), HttpStatus.OK);
             }
             case INTRO -> {
                 IntroCourse introCourse = new IntroCourse(event, new ArrayList<>());
@@ -60,12 +60,13 @@ public class EventController {
         return eventService.getAllTrainings();
     }
 
-    @PostMapping("/{eventID/addGuest")
+    @PostMapping("/events/{eventId/addGuest")
     public ResponseEntity<?> addGuestToCourse(@PathVariable String eventId, @RequestBody GuestUser guestUser) {
         eventService.addGuestToCourse(eventId, guestUser);
         return ResponseEntity.ok().build();
     }
-    @PostMapping("/{eventId}/removeGuest")
+
+    @PostMapping("/event/{eventId}/removeGuest")
     public ResponseEntity<?> removeGuestFromCourse(@PathVariable String eventId, @RequestBody GuestUser guestUser) {
         eventService.removeGuestFromCourse(eventId, guestUser);
         return ResponseEntity.ok().build();
