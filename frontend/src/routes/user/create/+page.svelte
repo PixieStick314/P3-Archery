@@ -119,7 +119,7 @@
     function validateName(){
         const field = fields.name;
         field.message = "";
-        const nameRegex = /^[A-Za-zæøåÆØÅ]+ [A-Za-zæøåÆØÅ]+$/;
+        const nameRegex = /^[A-Za-zæøåÆØÅ]+(?:\s+[A-Za-zæøåÆØÅ]+)*\s[A-Za-zæøåÆØÅ]+$/;
         if(nameRegex.test(field.value)){
             field.message = "";
             return true;

@@ -1,4 +1,4 @@
-let userId = "654e0e53379b866321d1ea56"
+let userId = "655b526f5ef19371ff5fc2c2"
 
 export const load = async () => {
     const response = await fetch(`http://localhost:8080/user/${userId}`, {

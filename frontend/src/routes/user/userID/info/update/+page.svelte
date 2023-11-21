@@ -9,9 +9,7 @@
     const numberRegex = /\d/;
 
     import { format } from 'date-fns';
-    let formattedDate = format(new Date(data.user.dateOfBirth), 'yyyy-MM-dd');
-
-    console.log(data);
+    let formattedDate = format(new Date(data.user.dateOfBirth), 'yyyy/mm/dd')
 
     $: fields = {
         email: {
@@ -57,7 +55,7 @@
 
     };
 
-    let emailValue = "";
+    let emailValue = data.user.email;
     function validateEmail() {
         let emailRegex = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;;
         const field = fields.email;
@@ -81,9 +79,13 @@
         }
     }
 
+
+    let passwordValue = data.user.password;
     function validatePassword() {
+
         const capitalRegex = /[A-Z]/;
         const field = fields.password;
+        fields.password.value = passwordValue;
 
         const hasCapital = capitalRegex.test(field.value);
         const hasNumber = numberRegex.test(field.value);
@@ -98,7 +100,7 @@
         else if (field.value === ""){
             field.message = "Vi deler aldrig din email.";
             field.textColor = "black";
-            field.value = data.user.password;
+            fields.password.value = passwordValue;
             return true
         }
         else {
@@ -122,30 +124,34 @@
             return false;
         }
     }
+
+
+    let passwordConfirmValue = data.user.password;
     function validateConfirmPassword(){
         const field = fields.confirmPassword;
         field.message = "";
         field.textColor = "red";
-        const oldPassword = data.user.password;
+        fields.confirmPassword.value = passwordConfirmValue;
 
         if(fields.password.value === "") {
+            field.message = ""
             return true
-        } else if (fields.password.value === fields.confirmPassword.value){
+        } else if (fields.confirmPassword.value === fields.password.value){
             field.message = ""
             return true;
         } else {
+            console.log("Confirm: " + fields.confirmPassword.value + "\nPass: " + fields.password.value)
             field.message = "Matcher ikke din kode"
             return false;
         }
     }
 
-    let nameValue = ""
+    let nameValue = data.user.name;
     function validateName(){
         const field = fields.name;
         fields.name.value = nameValue;
-
         field.message = "";
-        const nameRegex = /^[A-Za-zæøåÆØÅ]+ [A-Za-zæøåÆØÅ]+$/;
+        const nameRegex = /^[A-Za-zæøåÆØÅ]+(?:\s+[A-Za-zæøåÆØÅ]+)*\s[A-Za-zæøåÆØÅ]+$/;
 
         if(nameRegex.test(field.value)){
             field.message = "";
@@ -169,7 +175,7 @@
         }
     }
 
-    let addressValue = ""
+    let addressValue = data.user.address;
     function validateAddress() {
         const field = fields.address;
         fields.address.value = addressValue
@@ -193,7 +199,7 @@
         }
     }
 
-    let postcodeValue = "";
+    let postcodeValue = data.user.postcode;
     function validatePostcode() {
         const field = fields.postcode;
         field.message = "";
@@ -214,7 +220,7 @@
         }
     }
 
-    let cellphoneNrValue = "";
+    let cellphoneNrValue = data.user.cellphoneNr;
     function validatePhonenumber() {
         const field = fields.cellphoneNr;
         let cellphoneNrRegex = /^\d{8}$/;
@@ -236,22 +242,11 @@
         }
     }
 
+    function dateFunc () {
+        fields.dateOfBirth.value = data.user.dateOfBirth
+    }
     function validate(event) {
-        //The user should not be allowed to send a form with empty text fields
-        if(emailValue.trim() === ""){
-            emailValue = data.user.email;
-        }
-        else if(nameValue.trim() === ""){
-            nameValue = data.user.name;
-            console.log(nameValue);
-        }
-        else if(addressValue.trim() === ""){
-            addressValue = data.user.address;
-        }
-        else if(cellphoneNrValue.trim() === ""){
-            cellphoneNrValue = data.user.cellphoneNr;
-        }
-        else if(!validateEmail() ||
+       if(!validateEmail() ||
             !validatePassword() ||
             !validateConfirmPassword() ||
             !validateName() ||
@@ -263,6 +258,9 @@
             return false;
         }
     }
+
+    let userGender = data.user.gender;
+    let show = false;
 </script>
 
 <form name="userUpdate" method="POST" action="?/update" class="container-sm mt-5" on:submit={validate}>
@@ -273,22 +271,24 @@
     </div>
 
     <div class="mb-3">
-        <label for="passwordInfo" class="form-label">Nuværende kodeord</label>
-        <div id="passwordInfo" class="form-text">{fields.password.value}</div>
-    </div>
-
-    <div class="mb-3">
         <label for="passwordInput" class="form-label">Kodeord</label>
-        <input name="password" type="password" class="form-control" id="passwordInput" on:input={validatePassword}>
-        <div id="passHelp" class="form-text" style="color: {fields.password.textColor}" >{@html fields.password.message}</div>
+        {#if show}
+            <input type="text" bind:value={passwordValue} on:input={validatePassword} class="form-control" id="passwordInput">
+        {:else}
+            <input type="password" bind:value={passwordValue} on:input={validatePassword} class="form-control" id="passwordInput">
+        {/if}
+        <div id="passHelp" class="form-text" style="color: {fields.password.textColor}">{@html fields.password.message}</div>
     </div>
-
     <div class="mb-3">
         <label for="confirmPasswordInput" class="form-label">Bekræft kodeord</label>
-        <input name="confirmPassword" type="password" class="form-control" id="confirmPasswordInput" on:input={validateConfirmPassword}>
+        {#if show}
+            <input type="text" bind:value={passwordConfirmValue} on:input={validateConfirmPassword} name="confirmPassword" class="form-control" id="confirmPasswordInput">
+        {:else}
+            <input type="password" bind:value={passwordConfirmValue} on:input={validateConfirmPassword} name="confirmPassword" class="form-control" id="confirmPasswordInput">
+        {/if}
         <div id="confPassHelp" class="form-text" style="color: {fields.confirmPassword.textColor}" >{@html fields.confirmPassword.message}</div>
     </div>
-
+    <button id="eye" on:click|preventDefault={() => show = !show}>Vis kode</button>
     <div class="mb-3">
         <label for="nameInput" class="form-label">Fulde navn</label>
         <input bind:value={nameValue} name="name" type="text" class="form-control" id="nameInput" on:input={validateName} placeholder={data.user.name}>
@@ -296,8 +296,8 @@
     </div>
     <div class="mb-3">
         <label for="genderInput" class="form-label">Køn</label>
-        <select name="gender" id="genderInput" class="custom-select form-control" placeholder={data.user.gender}>
-            <option value="Select" disabled >Vælg en af følgende:</option>
+        <select id="genderInput" class="custom-select form-control">
+            <option value={userGender}>Nuværende køn: {userGender}</option>
             <option value="Mand">Mand</option>
             <option value="Kvinde">Kvinde</option>
             <option value="Andet">Andet</option>
@@ -320,7 +320,7 @@
     </div>
     <div class="mb-3">
         <label for="dateOfBirthInput" class="form-label">Fødselsdato</label>
-        <input value={formattedDate} name="dateOfBirth" type="date" class="form-control" id="dateOfBirthInput">
+        <input bind:value={formattedDate} name="dateOfBirth" type="date" class="form-control" id="dateOfBirthInput" on:input={dateFunc}>
     </div>
     <button type="submit" class="btn btn-primary">Opdatér</button>
 
