@@ -1,11 +1,20 @@
 package P3.Archery.controller;
 
+
 import P3.Archery.entity.User;
 import P3.Archery.service.UserService;
-import org.bson.types.ObjectId;
+import P3.Archery.util.TokenManager;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import java.util.Optional;
 
@@ -14,8 +23,12 @@ import java.util.Optional;
 @RequestMapping("/user")
 public class UserController {
     private final UserService userService;
+    private final TokenManager tokenManager;
 
-    public UserController(UserService userService) { this.userService = userService; }
+    public UserController(UserService userService, TokenManager tokenManager) {
+        this.userService = userService;
+        this.tokenManager = tokenManager;
+    }
 
     @PostMapping("/create")
     public ResponseEntity create(@RequestBody User user) {
@@ -53,5 +66,25 @@ public class UserController {
         }
     }
 
+    @PostMapping("/login")
+    public ResponseEntity<?> login(@RequestBody User user) {
+        //  Authenticate w/ UserService
+        User authenticatedUser = userService.authenticate(user.getEmail(), user.getPassword());
 
+        if (authenticatedUser != null){
+            //  Return user information and token:
+            Map<String, Object> response = new HashMap<>();
+            response.put("user", user);
+            response.put("token", tokenManager.generateToken());
+
+            //  return authenticated user and token
+            return ResponseEntity.ok(response);
+        }
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Authentication error");
+    }
+
+    @PostMapping("/logout")
+    public ResponseEntity<?> logout(HttpServletRequest request) {
+        return ResponseEntity.ok("logout success");
+    }
 }
