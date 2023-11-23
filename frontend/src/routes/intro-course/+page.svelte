@@ -28,27 +28,32 @@
 
         if (response.ok) {
             alert('Guest registered successfully');
-
         } else {
             alert('Failed to register guest');
-
         }
     }
 </script>
 
 <h1>Vælg et intro kursus:</h1>
-<form on:submit|preventDefault={addGuestToCourse}>
-    <select bind:value={selectedCourse}>
-        {#each courses as course}
-            <option value={course.id}>{course.eventName}</option>
-        {/each}
-    </select>
+<form on:submit|preventDefault={addGuestToCourse} class="container-sm mt-5">
+    <div class="mb-3">
+        <label for="courseSelect" class="form-label">Kursus</label>
+        <select id="courseSelect" bind:value={selectedCourse} class="form-control">
+            <option value="" disabled selected>Vælg et kursus</option>
+            {#each courses as course}
+                <option value={course.id}>{course.eventName}</option>
+            {/each}
+        </select>
+    </div>
+
     <h2>Gæstebruger information:</h2>
-    <label for="name">Navn:</label>
-    <input type="text" id="name" bind:value={name} required>
-    <br>
-    <label for="email">E-mail:</label>
-    <input type="email" id="email" bind:value={email} required>
-    <br>
-    <button type="submit">Registrer</button>
+    <div class="mb-3">
+        <label for="name" class="form-label">Navn:</label>
+        <input type="text" id="name" bind:value={name} class="form-control" required>
+    </div>
+    <div class="mb-3">
+        <label for="email" class="form-label">E-mail:</label>
+        <input type="email" id="email" bind:value={email} class="form-control" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Registrer</button>
 </form>
