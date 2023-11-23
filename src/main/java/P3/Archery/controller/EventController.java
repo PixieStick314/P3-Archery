@@ -60,15 +60,16 @@ public class EventController {
         return eventService.getAllTrainings();
     }
 
-    @PostMapping("/events/{eventId/addGuest")
+    @PostMapping("/event/{eventId}/addGuest")
     public ResponseEntity<?> addGuestToCourse(@PathVariable String eventId, @RequestBody GuestUser guestUser) {
         eventService.addGuestToCourse(eventId, guestUser);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.status(HttpStatus.OK).build();
     }
+
 
     @PostMapping("/event/{eventId}/removeGuest")
     public ResponseEntity<?> removeGuestFromCourse(@PathVariable String eventId, @RequestBody GuestUser guestUser) {
         eventService.removeGuestFromCourse(eventId, guestUser);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.status(HttpStatus.OK).build();
     }
 }
