@@ -11,4 +11,6 @@ public interface UserService {
     List<User> getAll();
     User update(User user);
     void deleteById(String id);
+
+    User authenticate(String email, String password);
 }
