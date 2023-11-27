@@ -17,15 +17,17 @@ public class IntroCourse extends Event{
     }
 
     public void addIntroCourseRegistration(GuestUser guestUser) {
-        if (this.guestAttendees == null) {
-            this.guestAttendees = new ArrayList<>();
+        if (guestUser == null) {
+            throw new IllegalArgumentException("Guest user cannot be null");
         }
         this.guestAttendees.add(guestUser);
     }
 
     public void removeIntroCourseRegistration(GuestUser guestUser) {
-        if (this.guestAttendees != null) {
-            this.guestAttendees.remove(guestUser);
+        if (guestUser == null) {
+            throw new IllegalArgumentException("Guest user cannot be null");
         }
+        this.guestAttendees.remove(guestUser);
     }
+
 }
