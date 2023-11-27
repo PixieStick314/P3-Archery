@@ -1,11 +1,16 @@
 package P3.Archery.entity;
 
-public class GuestUser{
+import org.springframework.data.mongodb.core.mapping.Document;
+
+import java.util.Date;
+
+@Document(collection = "guests")
+public class GuestUser extends User {
     public String name;
-    public String eMail;
-    public GuestUser(String name, String eMail) {
-        this.name = name;
-        this.eMail = eMail;
+    public String email;
+
+    public GuestUser(String name, String email) {
+        super(name, email);
     }
-    
+
 }
