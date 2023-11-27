@@ -1,5 +1,3 @@
-let email = '';
-let password = '';
 
 export const actions = {
     login: async({request}) => {

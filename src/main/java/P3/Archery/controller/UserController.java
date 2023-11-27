@@ -7,6 +7,8 @@ import P3.Archery.util.TokenManager;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -72,10 +74,13 @@ public class UserController {
         User authenticatedUser = userService.authenticate(user.getEmail(), user.getPassword());
 
         if (authenticatedUser != null){
+            Authentication authentication = new UsernamePasswordAuthenticationToken(authenticatedUser.getAuthorities(), authenticatedUser, null);
+
+            String token = tokenManager.generateToken(authentication);
             //  Return user information and token:
             Map<String, Object> response = new HashMap<>();
             response.put("user", user);
-            response.put("token", tokenManager.generateToken());
+            response.put("token", token);
 
             //  return authenticated user and token
             return ResponseEntity.ok(response);

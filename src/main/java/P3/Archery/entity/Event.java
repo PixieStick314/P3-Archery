@@ -98,8 +98,6 @@ public class Event{
         this.eventType = eventType;
     }
 
-    //  Constructor
-
     public void addAttendee(User user){
         this.attendees.add(user);
     }
@@ -115,6 +113,5 @@ public class Event{
     public int getAttendeeCount() {
         return attendees.size();
     }
-    //  Getters & Setters
     
 }
