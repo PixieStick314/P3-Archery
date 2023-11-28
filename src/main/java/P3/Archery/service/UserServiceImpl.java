@@ -3,17 +3,23 @@ package P3.Archery.service;
 import P3.Archery.entity.User;
 import P3.Archery.repository.UserRepository;
 import org.bson.types.ObjectId;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements UserService {
-
     private final UserRepository userRepository;
-    public UserServiceImpl(final UserRepository userRepository) {
+    private final PasswordEncoder passwordEncoder;
+    public UserServiceImpl(final UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
@@ -41,5 +47,19 @@ public class UserServiceImpl implements UserService {
         userRepository.deleteById(new ObjectId(id));
     }
 
+    @Override
+    public User authenticate(String email, String password){
+        User user = userRepository.findByEmail(email);
 
+        if (user != null && passwordEncoder.matches(password, user.getPassword())) {
+            // Authentication successful
+            Authentication authentication = new UsernamePasswordAuthenticationToken(user, user.getPassword());
+            SecurityContextHolder.getContext().setAuthentication(authentication);
+
+            return user;
+        } else {
+            // Authentication failed
+            return null;
+        }
+    }
 }

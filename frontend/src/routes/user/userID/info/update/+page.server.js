@@ -1,4 +1,4 @@
-let userId = "654c893fa37f671995cefba8"
+let userId = "655cb6123d75f26431ee4257"
 
 export const load = async () => {
     const response = await fetch(`http://localhost:8080/user/${userId}`, {
@@ -30,7 +30,6 @@ export const actions = {
                 postcode: data.get("postcode"),
                 cellphoneNr: data.get("cellphoneNr"),
                 dateOfBirth: data.get("dateOfBirth"),
-                archerySkillLevel: data.get("archerySkillLevel"),
             }),
             headers: {
                 'Content-Type': 'application/json; charset=utf-8'

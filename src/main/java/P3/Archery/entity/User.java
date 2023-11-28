@@ -55,6 +55,8 @@ public class User{
         this.name = name;
     }
 
+	public String getPassword() { return password; }
+
 	public String getGender() {
 		return gender;
 	}
@@ -91,6 +93,8 @@ public class User{
 		return hasLocker;
 	}
 
+	public void setPassword(String password) {this.password = password;}
+
 	public void setGender(String gender) {
 		this.gender = gender;
 	}
@@ -111,7 +115,7 @@ public class User{
 		this.dateOfBirth = dateOfBirth;
 	}
 
-	public void setEmail(String eMail) {
+	public void setEmail(String email) {
 		this.email = email;
 	}
 
@@ -134,70 +138,8 @@ public class User{
 			User newUser = new User(name, gender, address, postcode, cellphoneNr, dateOfBirth, email, archerySkillLevel, accessLevel, hasLocker, password);
 		} else throw new Exception("Du skal være superuser for at kunne bruge denne funktion");
 	}
-/*
-	public void modifyUser(User user, String buttonValue, String change) {
-		if (user.accessLevel == 0 || user == this) {
-			System.out.println("Hvad kunne du tænke dig at ændre?");
-			System.out.println("1. Navn\n" +
-					"2. Køn\n" +
-					"3. Addresse\n" +
-					"4. Telefon nummer\n" +
-					"5. Fødselsdag\n" +
-					"6. Email\n" +
-					"7. Bueskytte niveau\n" +);
-			System.out.println("Hvad skal det ændres til?");
-			//change = userChange.nextLine();
-			switch (buttonValue) {
-				//hvor meget verification skal vi bruge?
-				case "name":
-					this.name = change;
-					break;
-				case "adresse":
-					this.address = change;
-					break;
-				case "Køn":
-					this.gender = change;
-					break;
-				case "cellphoneNr":
-					this.cellphoneNr = change;
-					break;
-				case "dateOfBirth":
-					this.dateOfBirth = change;
-					break;
-				case "eMail":
-					this.eMail = change;
-					break;
-				case "archerySkillLevel":
-					this.archerySkillLevel = change;
-					break;
-				default:
-					throw new Exception("Der skete en fejl, prøv venligst igen");
-			}
-		}
-		else {
-			printf("Access denied")
-		}
-	}
 
-	public void removeUser(User admin, User RemovedUser){
-		if(admin.accessLevel == 0 || RemovedUser == this) {
-			RemovedUser = null;
-			//dunno how to remove user from db yet, to be implemented.
-		} else {
-			throw new Exception("Du skal være superuser eller den bruger der skal fjernes for, at denne funktion kan andvendes");
-		}
-	}
-
-	public void register(userNameField, userGenderField, userAddressField, userPostcodeField, userCellphoneNrField, userDateOfBirthField, userEMailField){
-		//uses registration information from textfields to create a new user
-		String name = userNameField.getText();
-		String gender = userGenderField.getText();
-		String address = userAddressField.getText();
-		int postcode = Integer.parseInt(userPostcodeField.getText());
-		int cellphoneNr = Integer.parseInt(userCellphoneNrField.getText());
-		String dateOfBirth = userDateOfBirthField.getText();
-		String eMail = userEMailField.getText();
-
-		User newUser = new User(name, gender, address, postcode, cellphoneNr, dateOfBirth, eMail, 0, 0, false);
-	}*/
+	public int getAuthorities() {
+        return this.accessLevel;
+    }
 }
