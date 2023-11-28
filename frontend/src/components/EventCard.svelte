@@ -19,7 +19,7 @@
             <p class="card-text">{event.eventType}</p>
             <p class="card-text">{event.startTime} - {event.endTime}</p>
             <p class="card-text">Location: {event.location}</p>
-            <a class="btn btn-primary">Register</a>
+            <button class="btn btn-primary" on:click={register}>Tilmeld</button>
         </div>
     </div>
 </div>

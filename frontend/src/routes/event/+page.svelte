@@ -55,7 +55,7 @@
                         <input name="endDate" type="datetime-local" id="endDateInput" class="form-control" />
                     </div>
                     <div class="mb-3">
-                        <label for="location" class="form-label">Lokation</label>
+                        <label for="locationInput" class="form-label">Lokation</label>
                         <input name="location" type="text" class="form-control" id="locationInput" placeholder="Vissevej 151" />
                     </div>
                     <div class="mb-3">

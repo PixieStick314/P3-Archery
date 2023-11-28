@@ -34,8 +34,7 @@ export const actions = {
 
         await load();
 
-        console.log(res)
-    }
-
+        console.log(res);
+    },
 
 }

@@ -69,6 +69,11 @@ public class EventController {
         }
     }
 
+    @PostMapping("/register")
+    public ResponseEntity register(@RequestBody RegisterReq registerReq) {
+        return new ResponseEntity("we got a request", HttpStatus.OK);
+    }
+
     @GetMapping("/")
     public List<Event> getAllEvents() {
         //TODO: once tokens are done, only return all if user is authenticated
