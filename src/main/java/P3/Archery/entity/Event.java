@@ -25,7 +25,8 @@ public class Event{
     public enum EventType {
         INTRO,
         TRAINING,
-        COMPETITION
+        COMPETITION,
+        OTHER
     }
 
     public Event(String eventName, User eventCreator, ZonedDateTime startTime, ZonedDateTime endTime, String location, EventType eventType) {

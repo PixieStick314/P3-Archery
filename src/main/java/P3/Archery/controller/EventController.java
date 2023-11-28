@@ -2,6 +2,7 @@ package P3.Archery.controller;
 
 
 import P3.Archery.entity.*;
+import P3.Archery.entity.request.RegisterReq;
 import P3.Archery.repository.EventRepository;
 import P3.Archery.service.EventService;
 import org.springframework.http.HttpStatus;

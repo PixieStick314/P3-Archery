@@ -4,6 +4,25 @@
     /** @type {import('./$types').PageData} */
     export let data;
 
+    //@ts-ignore
+    export const register = async (event) => {
+        event.detail.eventId;
+        const res = await fetch("http://localhost:8080/event/register", {
+            method: 'POST',
+            //add token so backend can get userID
+            headers: {
+                'Content-Type': 'application/json; charset=utf-8'
+            }
+        })
+
+        console.log(event.detail.eventId);
+
+        const reply = res.json();
+
+        return { reply }
+    }
+
+
 
 </script>
 
@@ -18,7 +37,7 @@
 <div class="container pt-5 text-center">
     {#if data?.events.length > 0}
         {#each data?.events as event}
-            <EventCard event={event} />
+            <EventCard event={event} on:message={register} />
         {/each}
     {:else}
         <h5>No events</h5>

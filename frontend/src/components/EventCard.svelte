@@ -1,6 +1,10 @@
 <script>
+    import { createEventDispatcher } from 'svelte';
+
+    const dispatch = createEventDispatcher();
 
     let testEvent = {
+        eventId: "1",
         eventName: "test event",
         eventType: "Placeholder event",
         startTime: "10:00",
@@ -9,6 +13,12 @@
     }
 
     export let event = testEvent;
+
+    function register() {
+        dispatch('message', {
+            eventId: event.eventId
+        });
+    }
 
 </script>
 

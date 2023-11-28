@@ -13,6 +13,7 @@ export const load = async () => {
     return { events }
 }
 
+
 export const actions = {
     //@ts-ignore
     create: async({request}) => {
