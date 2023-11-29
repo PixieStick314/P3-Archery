@@ -26,6 +26,4 @@ public class Competition extends Event{
         return fileName;
     }
 
-    
-
 }

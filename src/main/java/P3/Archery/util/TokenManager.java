@@ -25,7 +25,7 @@ public class TokenManager {
         User user =  (User) authentication.getPrincipal();
 
         return Jwts.builder()
-                .setSubject(user.getEmail())
+                .setSubject(user.getId())
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + tokenValidity))
                 .signWith(SignatureAlgorithm.HS256, secretKey)
@@ -44,4 +44,7 @@ public class TokenManager {
         }
     }
 
+    public void invalidateToken() {
+
+    }
 }

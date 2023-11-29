@@ -12,5 +12,5 @@ public interface UserService {
     User update(User user);
     void deleteById(String id);
 
-    User authenticate(String email, String password);
+    Boolean authenticate(String email, String password);
 }

@@ -71,10 +71,10 @@ public class UserController {
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody User user) {
         //  Authenticate w/ UserService
-        User authenticatedUser = userService.authenticate(user.getEmail(), user.getPassword());
+        Boolean authenticatedUser = userService.authenticate(user.getEmail(), user.getPassword());
 
         if (authenticatedUser != null){
-            Authentication authentication = new UsernamePasswordAuthenticationToken(authenticatedUser.getAuthorities(), authenticatedUser, null);
+            Authentication authentication = new UsernamePasswordAuthenticationToken(user.getAuthorities(), authenticatedUser, null);
 
             String token = tokenManager.generateToken(authentication);
             //  Return user information and token:
@@ -90,6 +90,7 @@ public class UserController {
 
     @PostMapping("/logout")
     public ResponseEntity<?> logout(HttpServletRequest request) {
+        tokenManager.invalidateToken();
         return ResponseEntity.ok("logout success");
     }
 }

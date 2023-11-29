@@ -32,6 +32,7 @@ public class User{
 				Date dateOfBirth, String email,
 				int archerySkillLevel, int accessLevel, boolean hasLocker, String password){
 		this.name = name;
+		this.id = id;
 		this.gender = gender;
 		this.address = address;
 		this.postcode = postcode;
@@ -54,6 +55,10 @@ public class User{
     public void setName(String name) {
         this.name = name;
     }
+
+	public String getId() {
+		return id;
+	}
 
 	public String getPassword() { return password; }
 

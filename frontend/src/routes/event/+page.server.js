@@ -1,4 +1,3 @@
-import {invalidateAll} from "$app/navigation";
 
 export const load = async () => {
     const res = await fetch("http://localhost:8080/event/", {

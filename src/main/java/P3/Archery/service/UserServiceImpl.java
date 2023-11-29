@@ -48,7 +48,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User authenticate(String email, String password){
+    public Boolean authenticate(String email, String password){
         User user = userRepository.findByEmail(email);
 
         if (user != null && passwordEncoder.matches(password, user.getPassword())) {
@@ -56,10 +56,10 @@ public class UserServiceImpl implements UserService {
             Authentication authentication = new UsernamePasswordAuthenticationToken(user, user.getPassword());
             SecurityContextHolder.getContext().setAuthentication(authentication);
 
-            return user;
+            return true;
         } else {
             // Authentication failed
-            return null;
+            return false;
         }
     }
 }
