@@ -1,6 +1,9 @@
 <script>
     import FBIcon from "$lib/assets/FBcircle.png"
 </script>
+
+<style src="./styles.css"> </style>
+
 <nav class="navbar navbar-dark bg-dark navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
     <div class="container-fluid">
         <a class="navbar-brand" href="/">Aalborg Bueskyttelaug</a>
@@ -34,6 +37,7 @@
         </div>
     </div>
 </nav>
+
 <slot></slot>
 <footer>
     <hr>
