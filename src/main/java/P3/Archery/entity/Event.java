@@ -25,7 +25,8 @@ public class Event{
     public enum EventType {
         INTRO,
         TRAINING,
-        COMPETITION
+        COMPETITION,
+        OTHER
     }
 
     public Event(String eventName, User eventCreator, ZonedDateTime startTime, ZonedDateTime endTime, String location, EventType eventType) {
@@ -98,8 +99,6 @@ public class Event{
         this.eventType = eventType;
     }
 
-    //  Constructor
-
     public void addAttendee(User user){
         this.attendees.add(user);
     }
@@ -115,6 +114,5 @@ public class Event{
     public int getAttendeeCount() {
         return attendees.size();
     }
-    //  Getters & Setters
     
 }

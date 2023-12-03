@@ -1,9 +1,6 @@
 package P3.Archery.service;
 
-import P3.Archery.entity.Competition;
-import P3.Archery.entity.Event;
-import P3.Archery.entity.IntroCourse;
-import P3.Archery.entity.Training;
+import P3.Archery.entity.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -13,6 +10,8 @@ public interface EventService {
     Optional<Event> getById(String id);
     List<Event> getAll();
     Event update(Event event);
+    Event register(Event event, User user);
+    Event introRegister(Event event, GuestUser guestUser);
     void deleteById(String id);
 
     List<Event> getAllCompetitions();

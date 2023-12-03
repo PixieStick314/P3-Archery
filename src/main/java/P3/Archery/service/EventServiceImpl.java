@@ -1,9 +1,6 @@
 package P3.Archery.service;
 
-import P3.Archery.entity.Competition;
-import P3.Archery.entity.Event;
-import P3.Archery.entity.IntroCourse;
-import P3.Archery.entity.Training;
+import P3.Archery.entity.*;
 import P3.Archery.repository.EventRepository;
 import org.springframework.stereotype.Service;
 
@@ -37,6 +34,18 @@ public class EventServiceImpl implements EventService {
 
     @Override
     public Event update(Event event) {
+        return eventRepository.save(event);
+    }
+
+    @Override
+    public Event register(Event event, User user) {
+        event.addAttendee(user);
+        return eventRepository.save(event);
+    }
+
+    @Override
+    public Event introRegister(Event event, GuestUser guestUser) {
+        ((IntroCourse) event).addIntroCourseRegistration(guestUser);
         return eventRepository.save(event);
     }
 

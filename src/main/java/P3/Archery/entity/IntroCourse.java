@@ -11,8 +11,8 @@ public class IntroCourse extends Event{
 
     private List<GuestUser> guestAttendees;
 
-    public IntroCourse(Event event, List<GuestUser> guestAttendees) {
-        super(event.getEventName(), event.getEventCreator(), event.getStartTime(), event.getEndTime(), event.getLocation(), event.getEventType());
+    public IntroCourse(String eventName, User eventCreator, ZonedDateTime startTime, ZonedDateTime endTime, String location, EventType eventType, List<GuestUser> guestAttendees) {
+        super(eventName, eventCreator, startTime, endTime, location, eventType);
         this.guestAttendees = guestAttendees;
     }
 
