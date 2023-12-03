@@ -1,5 +1,6 @@
 package P3.Archery.service;
 
+import P3.Archery.entity.Member;
 import P3.Archery.entity.User;
 import P3.Archery.repository.UserRepository;
 import org.bson.types.ObjectId;
@@ -49,7 +50,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Boolean authenticate(String email, String password){
-        User user = userRepository.findByEmail(email);
+        Member user = (Member) userRepository.findByEmail(email);
 
         if (user != null && passwordEncoder.matches(password, user.getPassword())) {
             // Authentication successful

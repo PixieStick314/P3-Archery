@@ -70,12 +70,12 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody User user) {
+    public ResponseEntity<?> login(@RequestBody Member user) {
         //  Authenticate w/ UserService
         Boolean authenticatedUser = userService.authenticate(user.getEmail(), user.getPassword());
 
         if (authenticatedUser != null){
-            Authentication authentication = new UsernamePasswordAuthenticationToken(user.getAuthorities(), authenticatedUser, null);
+            Authentication authentication = new UsernamePasswordAuthenticationToken(user.getAccessLevel(), authenticatedUser, null);
 
             String token = tokenManager.generateToken(authentication);
             //  Return user information and token:
