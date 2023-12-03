@@ -8,7 +8,7 @@ public class CompetitionForm {
     private long age;
     private int shootingClass;
     private String face;
-    public CompetitionForm (User user, Competition competition, int shootingClass, String face) {
+    public CompetitionForm (Member user, Competition competition, int shootingClass, String face) {
         this.name = user.getName();
         this.gender = user.getGender();
         //placeholder

@@ -6,8 +6,6 @@ import java.util.Date;
 
 @Document(collection = "guests")
 public class GuestUser extends User {
-    public String name;
-    public String email;
 
     public GuestUser(String name, String email) {
         super(name, email);

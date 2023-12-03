@@ -16,7 +16,7 @@ public class Competition extends Event{
         this.registrationList = registrationList;
     }
 
-    public void addRegistration(User user, Competition competition, int shootingClass, String face){
+    public void addRegistration(Member user, Competition competition, int shootingClass, String face){
         CompetitionForm registration = new CompetitionForm(user, competition, shootingClass, face);
         registrationList.add(registration);
     }
