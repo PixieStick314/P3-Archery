@@ -7,30 +7,26 @@
 
 <style>
     .site-header {
-        padding: 30px 0;
         border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     }
     .row {
         display: flex;
         flex-wrap: wrap;
-        margin-right: -15px;
-        margin-left: -15px;
+        margin-right: 1%;
         align-items: center;
         -webkit-box-align: center;
         width: 100%;
     }
     .container-fluid {
-        padding: 0 75px;
+        padding: 0 5%;
     }
     .navbar {
-        height: 186px;
-        padding: 30px 0;
+        height: 22%;
+        padding: 2% 0;
         width: 100%;
         top: 0;
         left: 0;
         z-index: 999;
-        text-align: left;
-
     }
     .main-navigation{
     }
@@ -57,10 +53,9 @@
     .nav-item{
         display: inline-block;
         position: relative;
-        padding: 0 25px;
-        padding-left: 15px;
-        font-weight: 500;
-        --font-family-sans-serif: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+        padding: 0 2%;
+        padding-left: 6%;
+        font-family: "Arial",serif;
     }
 </style>
 
@@ -82,28 +77,28 @@
                         aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="collapse navbar-collapse" style="padding-left: 80px"id="navbarSupportedContent">
+                <div class="collapse navbar-collapse" style="padding-left: 1%" id="navbarSupportedContent">
                     <ul class="navbar-nav" style="text-align: right">
                         <li class="nav-item">
-                            <a class="nav-link text-white fw-bold fs-5" aria-current="page" href="/event">Begivenheder</a>
+                            <a aria-current="page" class="nav-link text-white fs-6 fw-medium" href="/event">Begivenheder</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-white fw-bold fs-5" href="/user/userID/info">Medlemsskab</a>
+                            <a href="/user/userID/info" class="nav-link text-white fs-6">Medlemsskab</a>
                         </li>
                         <li class="nav-item">
-                            <a href="/user/userID/competitions" class="nav-link text-white fw-bold fs-5">Stævner</a>
+                            <a href="/user/userID/competitions" class="nav-link text-white fs-6">Stævner</a>
                         </li>
                         <li class="nav-item">
-                            <a href="/user/userID/contact" class="nav-link text-white fw-bold fs-5">Kontakt</a>
+                            <a href="/user/userID/contact" class="nav-link text-white fs-6">Kontakt</a>
                         </li>
                         <li class="nav-item">
-                            <a href="/user/userID/info" class="nav-link text-white fw-bold fs-5">Min Profil</a>
+                            <a href="/user/userID/info" class="nav-link text-white fs-6">Min Profil</a>
                         </li>
                         <li class="nav-item">
-                            <a href="/user/create" class="nav-link text-white fw-bold fs-5">Opret konto</a>
+                            <a href="/user/create" class="nav-link text-white fs-6">Opret konto</a>
                         </li>
                         <li class="nav-item">
-                            <a href="/user/userID/logout" class="nav-link text-white text fw-bold fs-5">Log ud</a>
+                            <a href="/user/userID/logout" class="nav-link text-white text fs-6">Log ud</a>
                         </li>
                     </ul>
                 </div>
