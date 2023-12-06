@@ -9,7 +9,7 @@
         eventType: "Placeholder event",
         startTime: "10:00",
         endTime: "14:00",
-        location: "Your mum's house"
+        location: "Aalborg"
     }
 
     export let event = testEvent;

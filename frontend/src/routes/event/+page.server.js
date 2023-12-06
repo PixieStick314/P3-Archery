@@ -1,4 +1,3 @@
-
 export const load = async () => {
     const res = await fetch("http://localhost:8080/event/", {
         method: 'GET',
@@ -9,13 +8,13 @@ export const load = async () => {
 
     const events = await res.json();
 
-    return { events }
+    return {events}
 }
 
 
 export const actions = {
     //@ts-ignore
-    create: async({request}) => {
+    create: async ({request}) => {
         const data = await request.formData();
 
         const res = await fetch("http://localhost:8080/event/create", {
