@@ -64,7 +64,7 @@
         <div class="row">
             <div class="site-branding col-md-4 col-sm-6 col-9">
                 <a class="custom-logo-link" href="/">
-                    <img class="custom-logo" width="103" height="125" src={BueskytteIcon} alt="Aalborg bueskyttelaug">
+                    <img class="custom-logo" width="103rem" height="125rem" src={BueskytteIcon} alt="Aalborg bueskyttelaug">
                 </a>
             </div>
             <div id="site-navigation" class="main-navigation col-md-8" style ="top: auto;">
