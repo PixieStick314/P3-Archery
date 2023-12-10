@@ -1,9 +1,7 @@
 package P3.Archery.controller;
 
-import P3.Archery.entity.Locker;
-import P3.Archery.repository.LockerRepository;
+import P3.Archery.model.Locker;
 import P3.Archery.service.LockerService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin(origins = "http://localhost:5173")

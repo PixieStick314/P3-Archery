@@ -1,7 +1,6 @@
-package P3.Archery.entity;
+package P3.Archery.model;
 
-import java.time.temporal.*;
-
+//TODO: Remove
 public class CompetitionForm {
     private String name;
     private String gender;

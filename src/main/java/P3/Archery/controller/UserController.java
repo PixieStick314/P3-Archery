@@ -1,23 +1,27 @@
 package P3.Archery.controller;
 
 
-import P3.Archery.entity.Member;
-import P3.Archery.entity.User;
+import P3.Archery.auth.JwtUtil;
+import P3.Archery.model.Member;
+import P3.Archery.model.User;
+import P3.Archery.model.request.LoginReq;
+import P3.Archery.model.response.ErrorRes;
+import P3.Archery.model.response.LoginRes;
 import P3.Archery.service.UserService;
-import P3.Archery.util.TokenManager;
+import io.jsonwebtoken.Claims;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.HashMap;
-import java.util.Map;
 
 import java.util.Optional;
 
@@ -26,72 +30,89 @@ import java.util.Optional;
 @RequestMapping("/user")
 public class UserController {
     private final UserService userService;
-    private final TokenManager tokenManager;
+    private final AuthenticationManager authenticationManager;
 
-    public UserController(UserService userService, TokenManager tokenManager) {
+    private final BCryptPasswordEncoder passwordEncoder;
+    private JwtUtil jwtUtil;
+
+    public UserController(UserService userService, AuthenticationManager authenticationManager, JwtUtil jwtUtil, BCryptPasswordEncoder passwordEncoder) {
         this.userService = userService;
-        this.tokenManager = tokenManager;
+        this.authenticationManager = authenticationManager;
+        this.jwtUtil = jwtUtil;
+        this.passwordEncoder = passwordEncoder;
     }
 
-    @PostMapping("/create")
+    @PostMapping("/register")
     public ResponseEntity create(@RequestBody Member member) {
-        return new ResponseEntity(userService.create(member), HttpStatus.OK);
-    }
+        if (userService.getByEmail(member.getEmail()) != null) {
+            ErrorRes errorRes = new ErrorRes(HttpStatus.BAD_REQUEST, "Email already in use");
+            return ResponseEntity.badRequest().body(errorRes);
+        }
+        member.setPassword(passwordEncoder.encode(member.getPassword()));
+        userService.create(member);
+        try {
+            String token = jwtUtil.createToken(member);
 
-    @PostMapping("/update/{userId}")
-    public ResponseEntity updateUser(@PathVariable(value = "userId") String id, @RequestBody Member member) {
-        Member targetUser = (Member) userService.getById(id).get();
-        if (targetUser != null) {
-            targetUser.setName(member.getName());
-            targetUser.setPassword(targetUser.getPassword());
-            targetUser.setGender(member.getGender());
-            targetUser.setAddress(member.getAddress());
-            targetUser.setPostcode(member.getPostcode());
-            targetUser.setCellphoneNr(member.getCellphoneNr());
-            targetUser.setDateOfBirth(member.getDateOfBirth());
-            targetUser.setEmail(member.getEmail());
-            targetUser.setArcherySkillLevel(member.getArcherySkillLevel());
-            System.out.println(member.getEmail());
-            return new ResponseEntity(userService.update(targetUser), HttpStatus.OK);
-        } else {
-            return new ResponseEntity("User not found", HttpStatus.BAD_REQUEST);
+            LoginRes loginRes = new LoginRes(member.getEmail(), token);
+
+            return ResponseEntity.ok(loginRes);
+        } catch (Exception e) {
+            ErrorRes errorRes = new ErrorRes(HttpStatus.BAD_REQUEST, "Unexpected error, please consult admin");
+            return ResponseEntity.badRequest().body(errorRes);
         }
     }
 
-    @GetMapping("/{userId}")
-    public ResponseEntity getUser(@PathVariable(value = "userId") String id) {
-        System.out.printf("Obtained id is: %s", id);
-        Optional<User> userOpt = userService.getById(id);
-        if (userOpt.isPresent()) {
-            return new ResponseEntity(userOpt, HttpStatus.OK);
-        } else {
-            return new ResponseEntity("User not found", HttpStatus.BAD_REQUEST);
+    @PostMapping("/update")
+    public ResponseEntity updateUser(HttpServletRequest req, @RequestBody Member member) {
+        Claims claims = jwtUtil.resolveClaims(req);
+        if (claims != null) {
+            String email = jwtUtil.getEmail(claims);
+            Member targetUser = (Member) userService.getByEmail(email);
+            if (targetUser != null) {
+                targetUser.setName(member.getName());
+                targetUser.setPassword(targetUser.getPassword());
+                targetUser.setGender(member.getGender());
+                targetUser.setAddress(member.getAddress());
+                targetUser.setPostcode(member.getPostcode());
+                targetUser.setCellphoneNr(member.getCellphoneNr());
+                targetUser.setDateOfBirth(member.getDateOfBirth());
+                targetUser.setEmail(member.getEmail());
+                targetUser.setArcherySkillLevel(member.getArcherySkillLevel());
+                System.out.println(member.getEmail());
+                return new ResponseEntity(userService.update(targetUser), HttpStatus.OK);
+            } else {
+                return new ResponseEntity("User not found", HttpStatus.BAD_REQUEST);
+            }
         }
+        return new ResponseEntity("Unexpected error, please consult admin", HttpStatus.BAD_REQUEST);
     }
 
+    //TODO: login
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody Member user) {
-        //  Authenticate w/ UserService
-        Boolean authenticatedUser = userService.authenticate(user.getEmail(), user.getPassword());
+    public ResponseEntity<?> login(@RequestBody LoginReq loginReq) {
+        try {
+            //TODO: Sometimes if email is the one that's incorrect it'll give an error other than invalid username or pass
+            Authentication authentication =
+                    authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginReq.getEmail(), loginReq.getPassword()));
+            String email = authentication.getName();
+            Member user = (Member) userService.getByEmail(email);
+            String token = jwtUtil.createToken(user);
 
-        if (authenticatedUser != null){
-            Authentication authentication = new UsernamePasswordAuthenticationToken(user.getAccessLevel(), authenticatedUser, null);
+            LoginRes loginRes = new LoginRes(email, token);
 
-            String token = tokenManager.generateToken(authentication);
-            //  Return user information and token:
-            Map<String, Object> response = new HashMap<>();
-            response.put("user", user);
-            response.put("token", token);
-
-            //  return authenticated user and token
-            return ResponseEntity.ok(response);
+            return ResponseEntity.ok(loginRes);
+        } catch (BadCredentialsException e) {
+            ErrorRes errorRes = new ErrorRes(HttpStatus.BAD_REQUEST, "Invalid username or password");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorRes);
+        } catch (Exception e) {
+            ErrorRes errorRes = new ErrorRes(HttpStatus.BAD_REQUEST, "Unexpected error, please consult admin");
+            return ResponseEntity.badRequest().body(errorRes);
         }
-        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Authentication error");
     }
 
+    //TODO: logout
     @PostMapping("/logout")
     public ResponseEntity<?> logout(HttpServletRequest request) {
-        tokenManager.invalidateToken();
         return ResponseEntity.ok("logout success");
     }
 }

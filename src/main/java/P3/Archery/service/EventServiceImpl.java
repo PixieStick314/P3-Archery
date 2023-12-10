@@ -1,6 +1,6 @@
 package P3.Archery.service;
 
-import P3.Archery.entity.*;
+import P3.Archery.model.*;
 import P3.Archery.repository.EventRepository;
 import org.springframework.stereotype.Service;
 

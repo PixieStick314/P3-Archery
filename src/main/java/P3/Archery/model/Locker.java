@@ -1,10 +1,9 @@
-package P3.Archery.entity;
+package P3.Archery.model;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.ZonedDateTime;
-import java.util.Date;
 
 @Document(collection = "lockers")
 public class Locker {

@@ -1,19 +1,27 @@
-package P3.Archery.entity;
+package P3.Archery.model;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.util.Date;
+import java.util.List;
 
 @Document(collection = "users")
 public class User{
     //  Attributes
+
+	public enum Role {
+		GUEST,
+		USER,
+		ADMIN;
+	}
 
 	@Id
 	private String id;
 
     private String name;
     private String email;
+
+	private List<Role> roles;
 
     //  Constructor
 	public User(String name, String email) {
@@ -43,6 +51,14 @@ public class User{
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public List<Role> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(List<Role> roles) {
+		this.roles = roles;
 	}
 
 /*

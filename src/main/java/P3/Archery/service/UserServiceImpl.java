@@ -1,26 +1,23 @@
 package P3.Archery.service;
 
-import P3.Archery.entity.Member;
-import P3.Archery.entity.User;
+import P3.Archery.model.Member;
+import P3.Archery.model.User;
 import P3.Archery.repository.UserRepository;
 import org.bson.types.ObjectId;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl implements UserService, UserDetailsService {
     private final UserRepository userRepository;
-    private final PasswordEncoder passwordEncoder;
-    public UserServiceImpl(final UserRepository userRepository, PasswordEncoder passwordEncoder) {
+
+    public UserServiceImpl(final UserRepository userRepository) {
         this.userRepository = userRepository;
-        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
@@ -44,23 +41,24 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User getByEmail(String email) {
+        return userRepository.findByEmail(email);
+    }
+
+    @Override
     public void deleteById(String id) {
         userRepository.deleteById(new ObjectId(id));
     }
 
     @Override
-    public Boolean authenticate(String email, String password){
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         Member user = (Member) userRepository.findByEmail(email);
+        UserDetails userDetails = org.springframework.security.core.userdetails.User.builder()
+                .username(user.getEmail())
+                .password(user.getPassword())
+                .roles(user.getRoles().stream().map(Enum::name).toArray(String[]::new))
+                .build();
 
-        if (user != null && passwordEncoder.matches(password, user.getPassword())) {
-            // Authentication successful
-            Authentication authentication = new UsernamePasswordAuthenticationToken(user, user.getPassword());
-            SecurityContextHolder.getContext().setAuthentication(authentication);
-
-            return true;
-        } else {
-            // Authentication failed
-            return false;
-        }
+        return userDetails;
     }
 }

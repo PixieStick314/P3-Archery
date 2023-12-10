@@ -1,4 +1,4 @@
-package P3.Archery.entity;
+package P3.Archery.model;
 
 import org.springframework.data.mongodb.core.mapping.Document;
 
