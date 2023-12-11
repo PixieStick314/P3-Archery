@@ -47,9 +47,11 @@ public class SecurityConfig {
         http.authorizeHttpRequests(request ->
                 request.requestMatchers(ENDPOINTS_WHITELIST).permitAll()
                         .anyRequest().authenticated())
+                //Cross site request forgery is disabled lmao, no one hopefully cares that much about spoofing archery club requests (I hope)
                 .csrf(csrf -> csrf.disable())
                 .sessionManagement((session) -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 //Technically, this makes it so that any route accessed outside the whitelisted routes is authenticated if someone has a valid token, this should be moved to a second filter
+                //Since there's no reason to automatically give auth to routes that aren't protected anyway
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
 
 
