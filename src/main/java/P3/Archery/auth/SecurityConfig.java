@@ -10,6 +10,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity
@@ -17,6 +18,8 @@ public class SecurityConfig {
     public static final String[] ENDPOINTS_WHITELIST = {
             "/user/login",
             "/user/register",
+            //TODO: Remove this in prod, this removes auth for all endpoints
+            "/**"
     };
 
     public static final String[] ENDPOINTS_ADMIN = {
@@ -25,9 +28,11 @@ public class SecurityConfig {
     };
 
     private final UserService userService;
+    private final JwtAuthFilter jwtAuthFilter;
 
-    public SecurityConfig(UserService userService) {
+    public SecurityConfig(UserService userService, JwtAuthFilter jwtAuthFilter) {
         this.userService = userService;
+        this.jwtAuthFilter = jwtAuthFilter;
     }
 
     @Bean
@@ -43,7 +48,9 @@ public class SecurityConfig {
                 request.requestMatchers(ENDPOINTS_WHITELIST).permitAll()
                         .anyRequest().authenticated())
                 .csrf(csrf -> csrf.disable())
-                .sessionManagement((session) -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
+                .sessionManagement((session) -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                //Technically, this makes it so that any route accessed outside the whitelisted routes is authenticated if someone has a valid token, this should be moved to a second filter
+                .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
 
 
 

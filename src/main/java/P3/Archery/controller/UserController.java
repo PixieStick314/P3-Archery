@@ -48,6 +48,7 @@ public class UserController {
             ErrorRes errorRes = new ErrorRes(HttpStatus.BAD_REQUEST, "Email already in use");
             return ResponseEntity.badRequest().body(errorRes);
         }
+        //TODO: Move encoding to userservice
         member.setPassword(passwordEncoder.encode(member.getPassword()));
         userService.create(member);
         try {
