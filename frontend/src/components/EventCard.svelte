@@ -14,9 +14,9 @@
 
     export let event = testEvent;
 
-    function register() {
+    function register(buttonID) {
         dispatch('message', {
-            eventId: event.eventId
+            eventId: buttonID
         });
     }
 
@@ -29,7 +29,7 @@
             <p class="card-text">{event.eventType}</p>
             <p class="card-text">{event.startTime} - {event.endTime}</p>
             <p class="card-text">Location: {event.location}</p>
-            <button class="btn btn-primary" on:click={register}>Tilmeld</button>
+            <button class="btn btn-primary" id="{event.eventId}" on:click={register(this.id)}>Tilmeld</button>
         </div>
     </div>
 </div>
