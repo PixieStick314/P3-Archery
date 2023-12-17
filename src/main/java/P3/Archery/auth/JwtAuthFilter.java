@@ -41,7 +41,6 @@ public class JwtAuthFilter extends OncePerRequestFilter {
                 System.out.println("No token found, skipping to next step in chain");
                 return;
             }
-            System.out.println("Token : " + accessToken);
             Claims claims = jwtUtil.resolveClaims(request);
 
             if (claims != null & jwtUtil.validateClaims(claims)) {
