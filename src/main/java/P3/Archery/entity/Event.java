@@ -29,7 +29,7 @@ public class Event{
         OTHER
     }
 
-    public Event(String eventName, User eventCreator, ZonedDateTime startTime, ZonedDateTime endTime, String location, EventType eventType) {
+    public Event(String eventName, User eventCreator, ZonedDateTime startTime, ZonedDateTime endTime, String location, EventType eventType, String eventID) {
         this.eventName = eventName;
         this.eventCreator = eventCreator;
         this.attendees.add(eventCreator);
@@ -37,6 +37,8 @@ public class Event{
         this.endTime = endTime;
         this.location = location;
         this.eventType = eventType;
+        this.eventID = eventID;
+
     }
 
     public String getEventName() {

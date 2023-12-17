@@ -4,7 +4,7 @@
     const dispatch = createEventDispatcher();
 
     let testEvent = {
-        eventId: "1",
+        eventID: "1",
         eventName: "test event",
         eventType: "Placeholder event",
         startTime: "10:00",
@@ -14,9 +14,9 @@
 
     export let event = testEvent;
 
-    function register() {
+    function register(eventID) {
         dispatch('message', {
-            eventId: event.eventId
+            eventID: eventID
         });
     }
 
@@ -29,7 +29,7 @@
             <p class="card-text">{event.eventType}</p>
             <p class="card-text">{event.startTime} - {event.endTime}</p>
             <p class="card-text">Location: {event.location}</p>
-            <button class="btn btn-primary" on:click={register}>Tilmeld</button>
+            <button class="btn btn-primary" on:click={register(event.eventID)}>Tilmeld</button>
         </div>
     </div>
 </div>

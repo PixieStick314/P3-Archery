@@ -36,6 +36,7 @@ public class EventController {
                         event.getEndTime(),
                         event.getLocation(),
                         event.getEventType(),
+                        event.getEventID(),
                         new ArrayList<>()
                 );
                 return new ResponseEntity(eventService.create(competition), HttpStatus.OK);
@@ -48,6 +49,7 @@ public class EventController {
                         event.getEndTime(),
                         event.getLocation(),
                         event.getEventType(),
+                        event.getEventID(),
                         new ArrayList<>()
                 );
                 return new ResponseEntity(eventService.create(training),HttpStatus.OK);
@@ -60,6 +62,7 @@ public class EventController {
                         event.getEndTime(),
                         event.getLocation(),
                         event.getEventType(),
+                        event.getEventID(),
                         new ArrayList<>()
                 );
                 return new ResponseEntity(eventService.create(introCourse), HttpStatus.OK);

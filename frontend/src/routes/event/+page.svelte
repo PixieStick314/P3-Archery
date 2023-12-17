@@ -6,7 +6,7 @@
 
     //@ts-ignore
     export const register = async (event) => {
-        event.detail.eventId;
+        event.detail.eventID;
         const res = await fetch("http://localhost:8080/event/register", {
             method: 'POST',
             //add token so backend can get userID
@@ -15,7 +15,7 @@
             }
         })
 
-        console.log(event.detail.eventId);
+        console.log(event.detail.eventID);
 
         const reply = res.json();
 

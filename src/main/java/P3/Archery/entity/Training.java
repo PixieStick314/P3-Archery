@@ -11,8 +11,8 @@ public class Training extends Event{
     public List<User> trainers;
     //public String skillLevel;
 
-    public Training(String eventName, User eventCreator, ZonedDateTime startTime, ZonedDateTime endTime, String location, EventType eventType, List<User> trainers) {
-        super(eventName, eventCreator, startTime, endTime, location, eventType);
+    public Training(String eventName, User eventCreator, ZonedDateTime startTime, ZonedDateTime endTime, String location, EventType eventType, String eventID, List<User> trainers) {
+        super(eventName, eventCreator, startTime, endTime, location, eventType, eventID);
         this.trainers = trainers;
         //this.skillLevel = skillLevel;
     }

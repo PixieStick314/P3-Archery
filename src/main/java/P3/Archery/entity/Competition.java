@@ -11,8 +11,8 @@ public class Competition extends Event{
     List<CompetitionForm> registrationList;
 
 
-    public Competition(String eventName, User eventCreator, ZonedDateTime startTime, ZonedDateTime endTime, String location, EventType eventType, List<CompetitionForm> registrationList) {
-        super(eventName, eventCreator, startTime, endTime, location, eventType);
+    public Competition(String eventName, User eventCreator, ZonedDateTime startTime, ZonedDateTime endTime, String location, EventType eventType, String eventID, List<CompetitionForm> registrationList) {
+        super(eventName, eventCreator, startTime, endTime, location, eventType, eventID);
         this.registrationList = registrationList;
     }
 
