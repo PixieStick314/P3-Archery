@@ -26,7 +26,6 @@ export const actions = {
                 endTime: data.get("endTime"),
                 location: data.get("location"),
                 eventType: data.get("eventType"),
-                eventID: data.get("eventname"),
             }),
             headers: {
                 'Content-Type': 'application/json; charset=utf-8'
