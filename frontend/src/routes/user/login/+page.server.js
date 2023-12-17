@@ -1,5 +1,6 @@
 
 export const actions = {
+    //@ts-ignore
     login: async({request}) => {
         const data = await request.formData();
         const res = await fetch("http://localhost:8080/user/login", {

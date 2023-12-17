@@ -1,6 +1,6 @@
 package P3.Archery.repository;
 
-import P3.Archery.entity.User;
+import P3.Archery.model.User;
 import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;

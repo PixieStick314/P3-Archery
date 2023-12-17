@@ -1,6 +1,6 @@
 package P3.Archery.service;
 
-import P3.Archery.entity.Locker;
+import P3.Archery.model.Locker;
 import P3.Archery.repository.LockerRepository;
 import org.springframework.stereotype.Service;
 

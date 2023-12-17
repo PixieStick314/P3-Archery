@@ -1,4 +1,4 @@
-package P3.Archery.entity;
+package P3.Archery.model;
 
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -17,7 +17,7 @@ public class Training extends Event{
         //this.skillLevel = skillLevel;
     }
 
-    public void addTrainer(User user){
+    public void addTrainer(Member user){
         if(user.getAccessLevel() <= 1) {
             this.trainers.add(user);
         }
@@ -25,7 +25,7 @@ public class Training extends Event{
             System.out.println("Error: You do not have permission");
         }
     }
-    public void removeTrainer(User user){
+    public void removeTrainer(Member user){
         if(user.getAccessLevel() <= 1) {
             this.trainers.remove(user);
         }

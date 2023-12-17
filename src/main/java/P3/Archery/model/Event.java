@@ -1,4 +1,4 @@
-package P3.Archery.entity;
+package P3.Archery.model;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -7,6 +7,7 @@ import java.time.*;
 import java.util.ArrayList;
 import java.util.List;
 
+//TODO: Make all fields private
 @Document(collection = "events")
 public class Event{
     //  Attributes

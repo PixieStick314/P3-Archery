@@ -1,9 +1,8 @@
-package P3.Archery.entity;
+package P3.Archery.model;
 
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.ZonedDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 @Document(collection = "events")
@@ -16,7 +15,7 @@ public class Competition extends Event{
         this.registrationList = registrationList;
     }
 
-    public void addRegistration(User user, Competition competition, int shootingClass, String face){
+    public void addRegistration(Member user, Competition competition, int shootingClass, String face){
         CompetitionForm registration = new CompetitionForm(user, competition, shootingClass, face);
         registrationList.add(registration);
     }

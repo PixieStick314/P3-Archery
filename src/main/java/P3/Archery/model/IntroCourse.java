@@ -1,9 +1,8 @@
-package P3.Archery.entity;
+package P3.Archery.model;
 
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.ZonedDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 @Document(collection = "events")
