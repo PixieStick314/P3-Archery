@@ -38,25 +38,27 @@ public class JwtAuthFilter extends OncePerRequestFilter {
             String accessToken = jwtUtil.resolveToken(request);
             if (accessToken == null) {
                 chain.doFilter(request, response);
+                System.out.println("No token found, skipping to next step in chain");
+                return;
             }
-            System.out.println("Token : " + accessToken);
             Claims claims = jwtUtil.resolveClaims(request);
 
-            if (claims != null && jwtUtil.validateClaims(claims)) {
+            if (claims != null & jwtUtil.validateClaims(claims)) {
                 String email = claims.getSubject();
                 System.out.println("email: " + email);
                 Authentication authentication =
-                        new UsernamePasswordAuthenticationToken(email,"", new ArrayList<>());
+                        new UsernamePasswordAuthenticationToken(email,"",new ArrayList<>());
                 SecurityContextHolder.getContext().setAuthentication(authentication);
             }
         } catch (Exception e) {
             errorDetails.put("message", "Authentication Error");
-            errorDetails.put("details", e.getMessage());
+            errorDetails.put("details",e.getMessage());
             response.setStatus(HttpStatus.FORBIDDEN.value());
             response.setContentType(MediaType.APPLICATION_JSON_VALUE);
 
             mapper.writeValue(response.getWriter(), errorDetails);
         }
+
 
         chain.doFilter(request, response);
     }
