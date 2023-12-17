@@ -39,7 +39,7 @@ public class JwtUtil {
         return Jwts.builder()
                 .setClaims(claims)
                 .setExpiration(tokenValidity)
-                .signWith(SignatureAlgorithm.HS256, secret_key)
+                .signWith(SignatureAlgorithm.HS256, secret_key.getBytes())
                 .compact();
     }
 
@@ -50,7 +50,9 @@ public class JwtUtil {
     public Claims resolveClaims(HttpServletRequest req) {
         try {
             String token = resolveToken(req);
+            System.out.println("Token from resolve: " + token);
             if (token != null) {
+                System.out.println("Passing claims now");
                 return parseJwtClaims(token);
             }
             return null;
