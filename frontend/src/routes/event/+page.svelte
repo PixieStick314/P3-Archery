@@ -1,8 +1,15 @@
 <script>
     import EventCard from "../../components/EventCard.svelte";
+    import {getToken} from "../../components/LocalStorage.js";
+    import {getContext} from "svelte";
 
     /** @type {import('./$types').PageData} */
     export let data;
+
+
+    const token = getContext('token');
+
+
 
     //@ts-ignore
     export const register = async (event) => {
@@ -11,7 +18,8 @@
             method: 'POST',
             //add token so backend can get userID
             headers: {
-                'Content-Type': 'application/json; charset=utf-8'
+                'Content-Type': 'application/json; charset=utf-8',
+                'Authorization': JSON.stringify((token == null) ? '' : token[1])
             }
         })
 

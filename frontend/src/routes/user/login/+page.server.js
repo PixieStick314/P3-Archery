@@ -1,3 +1,8 @@
+import {writable} from "svelte/store";
+import {redirect} from "@sveltejs/kit";
+import {setContext} from "svelte";
+import {goto} from "$app/navigation";
+import {browser} from "$app/environment";
 
 export const actions = {
     //@ts-ignore
@@ -14,20 +19,26 @@ export const actions = {
             }
         });
 
+        console.log(res)
+
         if (res.ok) {
             // Redirect to the users event page upon successful login
             const data = await res.json();
-            const { token, user} = data;
+            const {token} = data;
 
-            localStorage.setItem('token', token); //    to get the token, use auth.js in components
-            localStorage.setItem('user', JSON.stringify(user));
+            if (token != null) {
+                const token = writable();
+                $: token.set(token)
 
-            window.location.href = `/${user.id}/dashboard`; //   not final endpoint.
-            return { success: true };
+                console.log(token)
+                setContext('token', token);
+
+                throw redirect(302, '/event')
+            } else {
+                throw redirect(302, 'https://youtu.be/dQw4w9WgXcQ')
+            }
         } else {
-            // Handle login failure
-            return { success: false };
+            throw redirect(302, 'https://youtu.be/dQw4w9WgXcQ')
         }
-
     }
 }

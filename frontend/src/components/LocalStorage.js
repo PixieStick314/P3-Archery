@@ -1,6 +1,7 @@
+
 export function getToken() {
-    return localStorage.getItem('token');
+    return window.localStorage.getItem('token');
 }
 export function getUser(){
-    return localStorage.getItem('user');
+    return window.localStorage.getItem('user');
 }

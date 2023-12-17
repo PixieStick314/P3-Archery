@@ -18,8 +18,8 @@ public class SecurityConfig {
     public static final String[] ENDPOINTS_WHITELIST = {
             "/user/login",
             "/user/register",
+            "/event/",
             //TODO: Remove this in prod, this removes auth for all endpoints
-            "/**"
     };
 
     public static final String[] ENDPOINTS_ADMIN = {
