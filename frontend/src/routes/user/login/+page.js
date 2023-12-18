@@ -1,8 +1,10 @@
 import {writable} from "svelte/store";
 import {redirect} from "@sveltejs/kit";
-import {setContext} from "svelte";
+import {createEventDispatcher, setContext} from "svelte";
 import {goto} from "$app/navigation";
 import {browser} from "$app/environment";
+
+export const ssr = false;
 
 export const actions = {
     //@ts-ignore
@@ -24,14 +26,12 @@ export const actions = {
         if (res.ok) {
             // Redirect to the users event page upon successful login
             const data = await res.json();
-            const {token} = data;
+            const user = data;
 
-            if (token != null) {
+            if (user != null) {
                 const token = writable();
-                $: token.set(token)
-
                 console.log(token)
-                setContext('token', token);
+                setContext('user', user);
 
                 throw redirect(302, '/event')
             } else {

@@ -1,9 +1,48 @@
 <script>
-    /** @type {import('./$types').PageData} */
-    export let data;
 
-    /** @type {import('./$types').ActionData} */
-    export let form;
+    //@ts-ignore
+    import {setContext} from "svelte";
+    import {goto} from "$app/navigation";
+
+    const handleLogin = async (e) => {
+        const ACTION_URL = e.target.action;
+        const formData = new FormData(e.target);
+        const data = new URLSearchParams()
+        for (let field of formData) {
+            const [key, value] = field;
+            data.append(key, value.toString())
+        }
+
+
+        const res = await fetch("http://localhost:8080/user/login", {
+            method: 'POST',
+            body: JSON.stringify({
+                email: data.get("email"),
+                password: data.get("password"),
+            }),
+            headers: {
+                'Content-Type': 'application/json; charset=utf-8'
+            }
+        });
+
+        if (res.ok) {
+            const result = await res.json();
+            const user = result;
+
+            if (user != null) {
+                console.log(user)
+                setContext('user', user);
+
+                await goto('/event');
+            } else {
+                await goto('')
+            }
+
+        }
+
+    }
+
+
 
 </script>
 <main>
