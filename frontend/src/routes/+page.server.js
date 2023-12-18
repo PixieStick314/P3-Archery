@@ -1,12 +1,6 @@
 import {writable} from "svelte/store";
 import {redirect} from "@sveltejs/kit";
-import {createEventDispatcher, setContext} from "svelte";
-import {goto} from "$app/navigation";
-import {browser} from "$app/environment";
 
-export const ssr = false;
-
-/*
 export const actions = {
     //@ts-ignore
     login: async({request}) => {
@@ -30,11 +24,13 @@ export const actions = {
             const user = data;
 
             if (user != null) {
-                const token = writable();
-                console.log(token)
-                setContext('user', user);
+                console.log(user)
 
-                throw redirect(302, '/event')
+                return {
+                    success: true,
+                    user: user
+                }
+
             } else {
                 throw redirect(302, 'https://youtu.be/dQw4w9WgXcQ')
             }
@@ -42,4 +38,4 @@ export const actions = {
             throw redirect(302, 'https://youtu.be/dQw4w9WgXcQ')
         }
     }
-}*/
+}

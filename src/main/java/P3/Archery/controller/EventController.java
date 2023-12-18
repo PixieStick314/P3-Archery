@@ -77,9 +77,11 @@ public class EventController {
     }
 
     @GetMapping("/")
-    public List<Event> getAllEvents() {
+    public ResponseEntity getAllEvents() {
         //TODO: once tokens are done, only return all if user is authenticated
-        return eventService.getAll();
+       // return eventService.getAll();
+        return new ResponseEntity<>(eventService.getAll(), HttpStatus.OK);
+
     }
 
     @GetMapping("/competition")

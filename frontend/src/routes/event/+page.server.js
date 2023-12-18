@@ -2,15 +2,20 @@ export const load = async () => {
     const res = await fetch("http://localhost:8080/event/", {
         method: 'GET',
         headers: {
-            'Content-Type': 'application/json; charset=utf-8'
+            'Content-Type': 'application/json; charset=utf-8',
+            'Authorization': 'Bearer ' + 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJjdW1AY3VtLmNvbSIsImlkIjoiNjU3NjI1MTMxYjVmY2Q2ZGMwNmU3ODRkIiwibmFtZSI6InNoaXQiLCJleHAiOjE5MTg4NTQ3NzV9.m9vy1wK8xQBUPSqjjJ5qvCJ2_mAZH9-rckhzR9YYfy0'
         }
     })
 
-    const events = await res.json();
+    console.log(res)
+    if (res.ok) {
+        const events = await res.json();
+        return {events}
+    } else {
+        return {events : {} }
+    }
 
-    return {events}
 }
-
 
 export const actions = {
     //@ts-ignore
@@ -31,7 +36,7 @@ export const actions = {
             }
         })
 
-        await load();
+        //await load();
 
         console.log(res);
     },

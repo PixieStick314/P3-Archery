@@ -20,7 +20,6 @@ public class SecurityConfig {
     public static final String[] ENDPOINTS_WHITELIST = {
             "/user/login",
             "/user/register",
-            "/event/",
             //TODO: Remove this in prod, this removes auth for all endpoints
     };
 
@@ -59,24 +58,6 @@ public class SecurityConfig {
         return http.build();
     }
 
-/*
-    @Bean
-    @Order(2)
-    public SecurityFilterChain adminFilterChain(HttpSecurity http) throws Exception {
-        http
-                .csrf(csrf -> csrf.disable())
-                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .authorizeHttpRequests(request ->
-                        request
-                                .requestMatchers(ENDPOINTS_ADMIN)
-                                .
-                                .anyRequest()
-                                .authenticated())
-                .addFilter(adminFilter);
-
-        return http.build();
-    }
-*/
 
     @Bean
     BCryptPasswordEncoder passwordEncoder() {
