@@ -3,7 +3,7 @@ import {redirect} from "@sveltejs/kit";
 
 export const actions = {
     //@ts-ignore
-    login: async({request}) => {
+    login: async({request, cookies}) => {
         const data = await request.formData();
         const res = await fetch("http://localhost:8080/user/login", {
             method: 'POST',
@@ -21,14 +21,17 @@ export const actions = {
         if (res.ok) {
             // Redirect to the users event page upon successful login
             const data = await res.json();
-            const user = data;
 
-            if (user != null) {
-                console.log(user)
+            if (data != null) {
+                console.log(data)
+                cookies.set('user', data,
+                    {
+                        path: '/',
+                    })
 
                 return {
                     success: true,
-                    user: user
+                    user: data
                 }
 
             } else {

@@ -1,9 +1,9 @@
-export const load = async () => {
+export const load = async ({cookies}) => {
     const res = await fetch("http://localhost:8080/event/", {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json; charset=utf-8',
-            'Authorization': 'Bearer ' + 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJjdW1AY3VtLmNvbSIsImlkIjoiNjU3NjI1MTMxYjVmY2Q2ZGMwNmU3ODRkIiwibmFtZSI6InNoaXQiLCJleHAiOjE5MTg4NTQ3NzV9.m9vy1wK8xQBUPSqjjJ5qvCJ2_mAZH9-rckhzR9YYfy0'
+            'Authorization': 'Bearer ' + cookies.get('user')
         }
     })
 
