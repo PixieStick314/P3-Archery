@@ -16,18 +16,19 @@ export const actions = {
             }
         });
 
-        console.log(res)
+        //console.log(res)
 
         if (res.ok) {
             // Redirect to the users event page upon successful login
             const data = await res.json();
 
             if (data != null) {
-                console.log(data)
-                cookies.set('user', data,
+                //console.log(data)
+                cookies.set('user', data.token,
                     {
                         path: '/',
                     })
+                console.log("user cookie: " + cookies.get('user'));
 
                 return {
                     success: true,

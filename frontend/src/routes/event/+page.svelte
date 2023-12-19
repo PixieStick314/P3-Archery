@@ -2,33 +2,14 @@
     import EventCard from "../../components/EventCard.svelte";
     import {getToken} from "../../components/LocalStorage.js";
     import {onMount} from "svelte";
+    import {browser} from "$app/environment";
 
 
     /** @type {import('./$types').PageData} */
     export let data;
 
 
-
-
-    //@ts-ignore
-    export const register = async (event) => {
-        console.log("Tried to send token with user email of: " + data.user.email + " and a token of: " + data.user.token)
-        event.detail.eventID;
-        const res = await fetch("http://localhost:8080/event/register", {
-            method: 'POST',
-            //add token so backend can get userID
-            headers: {
-                'Content-Type': 'application/json; charset=utf-8',
-                'Authorization': JSON.stringify((data.user == null) ? '' : data.user.token)
-            }
-        })
-
-        console.log(event.detail.eventID);
-
-        const reply = res.json();
-
-        return { reply }
-    }
+    let eventId = null;
 
 
 
@@ -44,7 +25,7 @@
 
 <div class="container pt-5 text-center">
         {#each data?.events as event}
-            <EventCard event={event} on:message={register} />
+            <EventCard event={event} />
         {/each}
 
     <button type="button" data-bs-toggle="modal" data-bs-target="#EventCreater" class="btn btn-primary position-fixed rounded-circle bottom-0 end-0 me-3 mb-3" style='width: 4rem; height: 4rem'>

@@ -1,5 +1,6 @@
 <script>
-    import { createEventDispatcher } from 'svelte';
+    import {createEventDispatcher} from 'svelte';
+    import {browser} from "$app/environment";
 
     const dispatch = createEventDispatcher();
 
@@ -15,13 +16,15 @@
     export let event = testEvent;
 
     function register(eventID) {
-        dispatch('message', {
-            eventID: eventID
-        });
+            dispatch('message', {
+                eventID: eventID,
+
+            });
     }
 
 </script>
 
+<form action="/event?/register" method="post">
 <div class="row justify-content-center mx-1 my-3">
     <div class="col card">
         <div class="card-body">
@@ -29,8 +32,10 @@
             <p class="card-text">{event.eventType}</p>
             <p class="card-text">{event.startTime} - {event.endTime}</p>
             <p class="card-text">Location: {event.location}</p>
-            <button class="btn btn-primary" on:click={register(event.eventID)}>Tilmeld</button>
+            <input type="hidden" name = "eventId" value = {event.eventID}>
+            <button type="submit" class="btn btn-primary">Tilmeld</button>
         </div>
     </div>
 </div>
+</form>
 

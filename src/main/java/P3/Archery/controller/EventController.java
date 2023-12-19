@@ -1,15 +1,20 @@
 package P3.Archery.controller;
 
 
+import P3.Archery.auth.JwtUtil;
 import P3.Archery.model.*;
 import P3.Archery.model.request.RegisterReq;
 import P3.Archery.service.EventService;
+import P3.Archery.service.UserService;
+import io.jsonwebtoken.Claims;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @CrossOrigin(origins = "http://localhost:5173")
 @RestController
@@ -17,9 +22,14 @@ import java.util.List;
 public class EventController {
 
     private final EventService eventService;
+    private final UserService userService;
 
-    public EventController(EventService eventService) {
+    private final JwtUtil jwtUtil;
+
+    public EventController(EventService eventService, UserService userService, JwtUtil jwtUtil) {
         this.eventService = eventService;
+        this.userService = userService;
+        this.jwtUtil = jwtUtil;
     }
 
 
@@ -72,8 +82,22 @@ public class EventController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity register(@RequestBody RegisterReq registerReq) {
-        return new ResponseEntity("we got a request", HttpStatus.OK);
+    public ResponseEntity register(HttpServletRequest req, @RequestBody RegisterReq registerReq) {
+        Claims claims = jwtUtil.resolveClaims(req);
+        if (claims != null) {
+            Optional<User> member = userService.getById(jwtUtil.getId(claims));
+            if (member != null) {
+                System.out.println("Eventid from frontend: " + registerReq.getEventId());
+                Optional<Event> event = eventService.getById(registerReq.getEventId());
+                event.get().addAttendee(member.get());
+                eventService.update(event.get());
+            } else {
+                return new ResponseEntity<>("Failed to get user", HttpStatus.BAD_REQUEST);
+            }
+        } else {
+            return new ResponseEntity<>("Potentially invalid token", HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @GetMapping("/")
