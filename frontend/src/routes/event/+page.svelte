@@ -1,26 +1,15 @@
 <script>
     import EventCard from "../../components/EventCard.svelte";
+    import {getToken} from "../../components/LocalStorage.js";
+    import {onMount} from "svelte";
+    import {browser} from "$app/environment";
+
 
     /** @type {import('./$types').PageData} */
     export let data;
 
-    //@ts-ignore
-    export const register = async (event) => {
-        event.detail.eventId;
-        const res = await fetch("http://localhost:8080/event/register", {
-            method: 'POST',
-            //add token so backend can get userID
-            headers: {
-                'Content-Type': 'application/json; charset=utf-8'
-            }
-        })
 
-        console.log(event.detail.eventId);
-
-        const reply = res.json();
-
-        return { reply }
-    }
+    let eventId = null;
 
 
 
@@ -35,13 +24,9 @@
 </div>
 
 <div class="container pt-5 text-center">
-    {#if data?.events.length > 0}
         {#each data?.events as event}
-            <EventCard event={event} on:message={register} />
+            <EventCard event={event} />
         {/each}
-    {:else}
-        <h5>No events</h5>
-    {/if}
 
     <button type="button" data-bs-toggle="modal" data-bs-target="#EventCreater" class="btn btn-primary position-fixed rounded-circle bottom-0 end-0 me-3 mb-3" style='width: 4rem; height: 4rem'>
         <svg fill="white" stroke="white" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">

@@ -1,21 +1,26 @@
-
-export const load = async () => {
+// @ts-ignore
+export const load = (async ({ cookies }) => {
+    console.log(cookies.get('user'))
     const res = await fetch("http://localhost:8080/event/", {
         method: 'GET',
         headers: {
-            'Content-Type': 'application/json; charset=utf-8'
+            'Content-Type': 'application/json; charset=utf-8',
+            'Authorization': 'Bearer ' + cookies.get('user')
         }
     })
 
-    const events = await res.json();
-
-    return { events }
-}
-
+    //console.log(res)
+    if (res.ok) {
+        const events = await res.json();
+        return {events}
+    } else {
+        return {events : {} }
+    }
+})
 
 export const actions = {
     //@ts-ignore
-    create: async({request}) => {
+    create: async ({request}) => {
         const data = await request.formData();
 
         const res = await fetch("http://localhost:8080/event/create", {
@@ -32,9 +37,36 @@ export const actions = {
             }
         })
 
-        await load();
+        //await load();
 
         console.log(res);
     },
+
+    // @ts-ignore
+    register: async ({request, cookies}) => {
+        const data = await request.formData();
+
+        console.log("Event id from register: " + JSON.stringify({eventId: data.get("eventId")}));
+
+        const res = await fetch("http://localhost:8080/event/register", {
+            method: 'POST',
+            body: JSON.stringify({
+                eventId: data.get("eventId")
+            }),
+            //add token so backend can get userID
+            headers: {
+                'Content-Type': 'application/json; charset=utf-8',
+                'Authorization': 'Bearer ' + cookies.get('user')
+            }
+        })
+
+        if (res.ok) {
+            const data = res;
+            console.log(data)
+            return {
+                message: "deez"
+            }
+        }
+    }
 
 }

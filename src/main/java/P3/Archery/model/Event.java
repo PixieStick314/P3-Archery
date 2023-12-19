@@ -1,4 +1,4 @@
-package P3.Archery.entity;
+package P3.Archery.model;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -7,6 +7,7 @@ import java.time.*;
 import java.util.ArrayList;
 import java.util.List;
 
+//TODO: Make all fields private
 @Document(collection = "events")
 public class Event{
     //  Attributes
@@ -29,7 +30,7 @@ public class Event{
         OTHER
     }
 
-    public Event(String eventName, User eventCreator, ZonedDateTime startTime, ZonedDateTime endTime, String location, EventType eventType) {
+    public Event(String eventName, User eventCreator, ZonedDateTime startTime, ZonedDateTime endTime, String location, EventType eventType, String eventID) {
         this.eventName = eventName;
         this.eventCreator = eventCreator;
         this.attendees.add(eventCreator);
@@ -37,6 +38,8 @@ public class Event{
         this.endTime = endTime;
         this.location = location;
         this.eventType = eventType;
+        this.eventID = eventID;
+
     }
 
     public String getEventName() {

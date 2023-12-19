@@ -1,5 +1,10 @@
 <script>
-    let isLoggedIn = false;
+
+
+    import { page } from '$app/stores';
+
+    let isLoggedIn = ($page.data.user != null);
+
 </script>
 
 <nav class="navbar navbar-dark bg-dark navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">

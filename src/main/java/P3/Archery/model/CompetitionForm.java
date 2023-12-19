@@ -1,14 +1,13 @@
-package P3.Archery.entity;
+package P3.Archery.model;
 
-import java.time.temporal.*;
-
+//TODO: Remove
 public class CompetitionForm {
     private String name;
     private String gender;
     private long age;
     private int shootingClass;
     private String face;
-    public CompetitionForm (User user, Competition competition, int shootingClass, String face) {
+    public CompetitionForm (Member user, Competition competition, int shootingClass, String face) {
         this.name = user.getName();
         this.gender = user.getGender();
         //placeholder
