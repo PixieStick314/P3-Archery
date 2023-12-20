@@ -36,10 +36,10 @@ export const actions = {
                 }
 
             } else {
-                throw redirect(302, 'https://youtu.be/dQw4w9WgXcQ')
+                throw redirect(302, '/')
             }
         } else {
-            throw redirect(302, 'https://youtu.be/dQw4w9WgXcQ')
+            throw redirect(302, '/')
         }
     }
 }

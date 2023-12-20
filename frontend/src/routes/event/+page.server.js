@@ -64,7 +64,7 @@ export const actions = {
             const data = res;
             console.log(data)
             return {
-                message: "deez"
+                message: "Success"
             }
         }
     }
